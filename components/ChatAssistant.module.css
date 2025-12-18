@@ -42,11 +42,14 @@
 }
 
 .fab:hover {
-    transform: scale(1.1) rotate(5deg);
-    background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-    box-shadow: 0 10px 30px rgba(79, 70, 229, 0.5);
+    transform: scale(1.1);
+    background: white;
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.6),
+        0 0 20px rgba(139, 92, 246, 0.4),
+        0 0 40px rgba(124, 58, 237, 0.3),
+        0 10px 30px rgba(0, 0, 0, 0.15);
     animation: none;
-    /* Stop pulse on hover */
 }
 
 .badge {
