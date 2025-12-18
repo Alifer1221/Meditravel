@@ -192,54 +192,71 @@
 }
 
 /* Mobile Responsiveness */
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .line {
-        left: 20px;
-        /* Line moves to left */
-    }
-
-    .stepItem,
-    .left,
-    .right {
+    .timeline {
         flex-direction: column;
-        /* Stack vertically, text below marker implies custom handling, but usually cards go right of line */
         align-items: flex-start;
-        padding-left: 50px;
+        gap: 0;
+        padding-left: 20px;
         /* Space for line */
     }
 
-    .content,
-    .labelContainer {
+    .line {
+        width: 2px;
+        height: 100%;
+        top: 0;
+        left: 20px;
+        /* Aligned with padding */
+        right: auto;
+    }
+
+    .progressLine {
+        width: 2px;
+        height: 100%;
+        /* Fill on mobile or animate height if possible, but simplest is full */
+        top: 0;
+        left: 20px;
+        transition: height 1s ease;
+    }
+
+    .stepItem {
         width: 100%;
-        text-align: left !important;
-        /* Force left align */
-        padding: 0;
-    }
-
-    .labelContainer {
-        margin-bottom: var(--spacing-2);
-        order: -1;
-        /* Label above card */
-        justify-content: flex-start !important;
-    }
-
-    .stepLabel {
-        font-size: var(--text-sm);
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        flex-direction: row;
+        /* Marker left, content right */
+        align-items: flex-start;
+        text-align: left;
+        margin-bottom: 30px;
+        transform: none;
+        /* Reset transform for simpler mobile render */
+        opacity: 1;
     }
 
     .markerContainer {
-        left: 20px;
-        /* Align with line */
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+        margin-bottom: 0;
+        /* Reset margins */
+        flex-shrink: 0;
+        /* Don't squash marker */
         transform: translateX(-50%);
-        top: 0;
-        /* Align with label/top */
+        /* Center on line */
+        background: #f8fafc;
+        /* Match bg to hide line behind marker */
+    }
+
+    .content {
+        margin-top: 0;
+        padding: 0;
+    }
+
+    .card {
+        width: 100%;
     }
 
     .card::after {
         display: none;
-        /* Remove arrow on mobile */
     }
 }
 
