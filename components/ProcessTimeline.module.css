@@ -73,6 +73,23 @@
     z-index: 0;
 }
 
+.fillingLine {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 4px;
+    /* Same thickness as base line */
+    background: linear-gradient(135deg, rgba(255, 87, 34, 1), rgba(255, 170, 0, 1));
+    /* Vibrant Orange Gradient matching Chat */
+    transform: translateY(-50%);
+    z-index: 1;
+    /* On top of base line */
+    box-shadow: 0 0 10px rgba(255, 120, 40, 0.5);
+    /* Glow effect */
+    transition: width 0.1s linear;
+    /* Smooth fill */
+}
+
 .stepItem {
     position: relative;
     min-width: 350px;
@@ -83,13 +100,16 @@
     text-align: center;
     z-index: 1;
     opacity: 0.4;
-    transform: scale(0.9);
-    transition: all 0.5s ease;
+    opacity: 0.4;
+    transition: all 0.2s ease-out;
+    /* Faster transition for scroll smoothness */
+    /* Transform handled inline for dynamic scaling */
 }
 
 .stepItem.activeStep {
     opacity: 1;
-    transform: scale(1.05);
+    z-index: 10;
+    /* Bring forward */
 }
 
 .stepItem.activeStep .marker {
