@@ -98,23 +98,42 @@
     width: 400px;
     /* Fixed width for calculation reliability */
     min-width: 400px;
-    padding: 0 40px;
-    /* Spacing inside item */
+    padding: 20px 40px;
+    /* Add vertical padding to prevent clipping of scaled markers */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     z-index: 1;
-    opacity: 0.4;
+    /* Removed global opacity to keep card background opaque */
     transition: all 0.2s ease-out;
-    /* Faster transition for scroll smoothness */
-    /* Transform handled inline for dynamic scaling */
+}
+
+/* Inactive State Styling targeting children */
+.stepItem:not(.activeStep) .card,
+.stepItem:not(.activeStep) .marker {
+    opacity: 0.5;
+    /* Fade the content visually */
+    filter: grayscale(1);
+    /* Optional: desaturate inactive */
+}
+
+/* Ensure background stays opaque to hide line */
+.card {
+    background: white;
+    /* Solid white */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: relative;
+    text-align: center;
+    z-index: 5;
+    /* Ensure above line */
 }
 
 .stepItem.activeStep {
-    opacity: 1;
     z-index: 10;
-    /* Bring forward above lines */
 }
 
 .stepItem.activeStep .marker {
@@ -175,12 +194,12 @@
 }
 
 .markerContainer {
-    position: relative;
-    z-index: 2;
-    background: #f8fafc;
     /* Masks line behind */
-    padding: 10px;
+    padding: 15px;
+    /* Increased padding to avoid clipping */
     border-radius: 50%;
+    overflow: visible;
+    /* Prevent cutting off */
 }
 
 .marker {
@@ -197,12 +216,18 @@
     color: #64748b;
     transition: all 0.3s ease;
     z-index: 2;
+    position: relative;
+    /* For z-index context */
 }
 
 .stepNumber {
     font-size: 1.5rem;
     font-weight: 800;
     color: inherit;
+    line-height: 1;
+    /* Fix vertical alignment/clipping */
+    padding-top: 2px;
+    /* Visual center adjustment */
 }
 
 /* The Card */
