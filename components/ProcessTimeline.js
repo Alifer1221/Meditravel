@@ -61,30 +61,54 @@ export default function ProcessTimeline() {
                     <div className={styles.timelineMask}>
                         <div
                             className={styles.timelineTrack}
-                            style={{ transform: `translateX(-${scrollProgress * 65}%)` }} // Adjusted percentage to ensure last item is visible but not overscrolled
+                            style={{
+                                // Centering formula: 
+                                // Start: Center of 1st item (200px) is at 50vw -> offset = 50vw - 200px
+                                // Move: Shift left by distance between centers * progress
+                                // Total shift = (NumItems - 1) * ItemWidth = 4 * 400 = 1600px
+                                transform: `translateX(calc(50vw - 200px - ${scrollProgress * (t.steps.length - 1) * 400}px))`
+                            }}
                             ref={scrollContainerRef}
                         >
                             <div className={styles.line}></div>
+                            <div
+                                className={styles.fillingLine}
+                                style={{ width: `${scrollProgress * (t.steps.length - 1) * 400}px` }}
+                            // Width fills the distance traveled
+                            ></div>
 
-                            {t.steps.map((step, index) => (
-                                <div
-                                    key={index}
-                                    className={`${styles.stepItem} ${Math.abs(scrollProgress * 4 - index) < 0.5 ? styles.activeStep : ''}`}
-                                >
-                                    <div className={styles.markerContainer}>
-                                        <div className={styles.marker}>
-                                            <span className={styles.stepNumber}>{index + 1}</span>
+                            {t.steps.map((step, index) => {
+                                // Calculate how close this step is to the "virtual center"
+                                // Virtual center is exactly at index = scrollProgress * (total - 1)
+                                const activeIndex = scrollProgress * (t.steps.length - 1);
+                                const distanceFromCenter = Math.abs(activeIndex - index);
+                                const isFocused = distanceFromCenter < 0.5;
+
+                                return (
+                                    <div
+                                        key={index}
+                                        className={`${styles.stepItem} ${isFocused ? styles.activeStep : ''}`}
+                                        style={{
+                                            // Dynamic scale: 1.0 normally, up to 1.3 at center
+                                            transform: `scale(${1 + Math.max(0, 0.3 - distanceFromCenter * 0.3)})`,
+                                            opacity: Math.max(0.4, 1 - distanceFromCenter * 0.5)
+                                        }}
+                                    >
+                                        <div className={styles.markerContainer}>
+                                            <div className={styles.marker}>
+                                                <span className={styles.stepNumber}>{index + 1}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className={styles.content}>
+                                            <div className={styles.card}>
+                                                <h3 className={styles.cardTitle}>{step.title}</h3>
+                                                <p className={styles.cardDesc}>{step.description}</p>
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <div className={styles.content}>
-                                        <div className={styles.card}>
-                                            <h3 className={styles.cardTitle}>{step.title}</h3>
-                                            <p className={styles.cardDesc}>{step.description}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     </div>
                 </div>
