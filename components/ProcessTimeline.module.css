@@ -79,16 +79,17 @@
 .fillingLine {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: -50vw;
+    /* Start "before" the timeline */
     height: 4px;
     /* Same thickness as base line */
-    background: linear-gradient(135deg, rgba(255, 87, 34, 1), rgba(255, 170, 0, 1));
-    /* Vibrant Orange Gradient matching Chat */
+    background: linear-gradient(90deg, #ff5722, #ffaa00);
+    /* Horizontal gradient */
     transform: translateY(-50%);
-    z-index: 1;
-    /* On top of base line */
-    box-shadow: 0 0 10px rgba(255, 120, 40, 0.5);
-    /* Glow effect */
+    z-index: 0;
+    /* Behind items */
+    box-shadow: 0 0 10px rgba(255, 87, 34, 0.4);
+    /* Soft glow */
     transition: width 0.1s linear;
     /* Smooth fill */
 }
@@ -114,14 +115,19 @@
 .stepItem.activeStep {
     opacity: 1;
     z-index: 10;
-    /* Bring forward */
+    /* Bring forward above lines */
 }
 
 .stepItem.activeStep .marker {
-    background: var(--gradient-primary);
-    color: white;
-    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
-    border-color: transparent;
+    background: white;
+    color: #ff5722;
+    /* Orange number */
+    border-color: #ff5722;
+    box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.15);
+}
+
+.stepItem.activeStep .stepNumber {
+    color: #ff5722;
 }
 
 /* Containers */
