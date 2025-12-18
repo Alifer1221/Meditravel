@@ -15,7 +15,7 @@ export default function ChatAssistant() {
     const [showResumeOption, setShowResumeOption] = useState(false);
 
     // Cache buster log
-    useEffect(() => { console.log("ChatAssistant Loaded - Icon Version: Doctor Silhouette v3"); }, []);
+    useEffect(() => { console.log("ChatAssistant Loaded - Icon Version: Doctor Silhouette v4 BASE64"); }, []);
 
     const [pendingSessionId, setPendingSessionId] = useState(null);
 
@@ -161,7 +161,7 @@ export default function ChatAssistant() {
                     </svg>
                 ) : (
                     <img
-                        src="/doctor-icon.png"
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAACUCAYAAABRCU1RAAAAAXNSR0IArs4c6QAAIABJREFUeF7lfQmwXNdZ5td793v9ut+ixZJl2ZIlWZa12TEkkIRkSCAhy4QBMgmDgWGYceGCIgVFmKnJVFKBpMg/KrJv33hMv8rxpw1Ka7yiR7nW2IzwHmNCfBUp7Ko/Z7pl5d2kCdEvDqvpngZjyWbl6s3R8vYxbFkZ4YhCo4Q/6C+STWO5QIvWg8+oFadKUJ/v8Bo+KelGXOMugAAAAASUVORK5CYII="
                         alt="Chat con Doctor"
                         width="40"
                         height="40"
