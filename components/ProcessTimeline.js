@@ -91,5 +91,4 @@ export default function ProcessTimeline() {
             </div>
         </section>
     );
-    );
 }
