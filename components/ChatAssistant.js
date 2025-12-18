@@ -161,7 +161,7 @@ export default function ChatAssistant() {
                     </svg>
                 ) : (
                     <img
-                        src="/medical-avatar-final.png?v=restore"
+                        src="/doctor-icon-final.png"
                         alt="Chat Médico Online"
                         width="40"
                         height="40"
