@@ -17,62 +17,29 @@ export default function ProcessTimeline() {
             (entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
-                        const index = parseInt(entry.target.dataset.index);
-                        setVisibleSteps((prev) => [...new Set([...prev, index])]);
+                        // Animate line width when section is visible
+                        if (lineRef.current) {
+                            lineRef.current.style.width = '100%';
+                        }
+
+                        // Show all steps sequentially
+                        const steps = document.querySelectorAll(`.${styles.stepItem}`);
+                        steps.forEach((step, idx) => {
+                            setTimeout(() => {
+                                step.classList.add(styles.visible);
+                            }, idx * 200);
+                        });
                     }
                 });
             },
-            { threshold: 0.5, rootMargin: '0px 0px -10% 0px' }
+            { threshold: 0.2 }
         );
 
-        const steps = document.querySelectorAll(`.${styles.stepItem}`);
-        steps.forEach((step) => observer.observe(step));
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
 
         return () => observer.disconnect();
-    }, []);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            if (!containerRef.current || !lineRef.current) return;
-
-            const rect = containerRef.current.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
-
-            // Start filling when the top of the TIMELINE hits the center of the screen
-            const triggerPoint = windowHeight / 2;
-
-            if (rect.top <= triggerPoint) {
-                const scrolled = triggerPoint - rect.top;
-                const totalHeight = rect.height;
-                let percentage = (scrolled / totalHeight) * 100;
-
-                // Clamp between 0 and 100
-                percentage = Math.min(Math.max(percentage, 0), 100);
-                lineRef.current.style.height = `${percentage}%`;
-            } else {
-                lineRef.current.style.height = '0%';
-            }
-
-            // Update Markers
-            const steps = containerRef.current.querySelectorAll(`.${styles.stepItem}`);
-            steps.forEach((step) => {
-                const marker = step.querySelector(`.${styles.marker}`);
-                if (!marker) return;
-
-                const stepRect = step.getBoundingClientRect();
-                const markerCenter = stepRect.top + (stepRect.height / 2);
-
-                if (markerCenter <= triggerPoint) {
-                    marker.classList.add(styles.activeMarker);
-                } else {
-                    marker.classList.remove(styles.activeMarker);
-                }
-            });
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Initial check
-        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
@@ -90,20 +57,17 @@ export default function ProcessTimeline() {
                     {t.steps.map((step, index) => (
                         <div
                             key={index}
-                            data-index={index}
-                            className={`${styles.stepItem} ${index % 2 === 0 ? styles.left : styles.right} ${visibleSteps.includes(index) ? styles.visible : ''}`}
+                            className={styles.stepItem}
                         >
-                            <div className={styles.content}>
-                                <div className={styles.card}>
-                                    <h3 className={styles.cardTitle}>{step.title}</h3>
-                                    <p className={styles.cardDesc}>{step.description}</p>
+                            <div className={styles.markerContainer}>
+                                <div className={styles.marker}>
+                                    <span className={styles.arrowIcon}>→</span>
                                 </div>
                             </div>
 
-                            <div className={styles.markerContainer}>
-                                <div className={styles.marker}>
-                                    <span className={styles.arrowIcon}>↓</span>
-                                </div>
+                            <div className={styles.content}>
+                                <h3 className={styles.cardTitle}>{step.title}</h3>
+                                <p className={styles.cardDesc}>{step.description}</p>
                             </div>
 
                             <div className={styles.labelContainer}>

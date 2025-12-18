@@ -33,45 +33,51 @@
 
 .timeline {
     position: relative;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: var(--spacing-8) 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
 }
 
-/* The vertical central line */
+/* The horizontal central line */
 .line {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 2px;
+    top: 40px;
+    /* Aligned with markers */
+    left: 0;
+    right: 0;
+    height: 2px;
+    width: 100%;
     background: #e2e8f0;
-    transform: translateX(-50%);
     z-index: 0;
 }
 
 .progressLine {
     position: absolute;
-    top: 0;
-    left: 50%;
-    width: 2px;
-    background: linear-gradient(to bottom, #00C6FF, #0072ff);
-    transform: translateX(-50%);
+    top: 40px;
+    /* Aligned with markers */
+    left: 0;
+    height: 2px;
+    width: 0;
+    /* Starts at 0, animated by JS */
+    background: linear-gradient(to right, #00C6FF, #0072ff);
     z-index: 0;
-    height: 0;
-    transition: height 0.1s linear;
+    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .stepItem {
     position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: var(--spacing-6);
-    /* Reduced from spacing-12 for closer steps */
-    width: 100%;
+    text-align: center;
+    flex: 1;
     z-index: 1;
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(20px);
     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -80,105 +86,54 @@
     transform: translateY(0);
 }
 
-.stepItem:last-child {
-    margin-bottom: 0;
-}
-
-/* Base containers */
+/* Containers */
 .content {
-    width: 50%;
-    padding: 0 var(--spacing-12);
+    width: 100%;
+    /* Full width of the flex item */
+    padding: var(--spacing-4);
+    margin-top: 20px;
+    /* Space from marker */
 }
 
 .labelContainer {
-    width: 50%;
-    padding: 0 var(--spacing-12);
-    display: flex;
-    align-items: center;
+    width: 100%;
+    display: none;
+    /* Hide 'Step X' label if redundant, or style it */
 }
 
 .stepLabel {
-    font-size: var(--text-xl);
-    font-weight: 600;
-    color: var(--primary-600);
+    /* Optional styling if user wants it back */
+    font-size: var(--text-sm);
+    color: var(--text-light);
 }
 
-/* Alternating Logic */
-.left {
-    flex-direction: row;
-}
-
-.left .content {
-    text-align: right;
-}
-
-.left .labelContainer {
-    justify-content: flex-start;
-    /* Label on right side */
-}
-
-.right {
-    flex-direction: row-reverse;
-}
-
-.right .content {
-    text-align: left;
-}
-
-.right .labelContainer {
-    justify-content: flex-end;
-    /* Label on left side */
+/* Marker Centering */
+.markerContainer {
+    position: relative;
+    z-index: 2;
+    margin-bottom: 10px;
+    height: 80px;
+    /* Fixed height for alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* The Card */
-.card {
-    background: white;
-    padding: var(--spacing-8);
-    border-radius: var(--radius-lg);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    position: relative;
-    transition: transform 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-}
-
 .cardTitle {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     color: var(--primary-800);
-    margin-bottom: var(--spacing-3);
+    margin-bottom: var(--spacing-2);
     font-weight: 700;
 }
 
 .cardDesc {
     color: var(--text-light);
-    line-height: 1.6;
+    line-height: 1.5;
+    font-size: var(--text-sm);
 }
 
-/* Arrow/Triangle pointing to center */
-.card::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    transform: translateY(-50%);
-}
-
-.left .card::after {
-    right: -10px;
-    border-width: 10px 0 10px 10px;
-    border-color: transparent transparent transparent white;
-}
-
-.right .card::after {
-    left: -10px;
-    border-width: 10px 10px 10px 0;
-    border-color: transparent white transparent transparent;
-}
+/* Marker Styles */
 
 /* Center Marker (Red Circle with Arrow) */
 .markerContainer {
