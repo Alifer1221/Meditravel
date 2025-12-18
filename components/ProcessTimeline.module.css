@@ -61,16 +61,15 @@
 }
 
 /* The horizontal central line */
-/* The horizontal central line */
-/* The horizontal central line */
 .line {
     position: absolute;
     top: 50%;
-    left: 0;
+    left: -100vw;
+    /* Start way back to cover entrance */
     right: 0;
     height: 4px;
-    width: 100%;
-    /* Match track width exactly */
+    width: 400%;
+    /* Make it long enough */
     background: #e2e8f0;
     transform: translateY(-50%);
     z-index: 0;
@@ -79,15 +78,15 @@
 .fillingLine {
     position: absolute;
     top: 50%;
-    left: -50vw;
-    /* Start "before" the timeline */
+    left: -100vw;
+    /* Match starting point of background line */
     height: 4px;
     /* Same thickness as base line */
     background: linear-gradient(90deg, #ff5722, #ffaa00);
     /* Horizontal gradient */
     transform: translateY(-50%);
-    z-index: 0;
-    /* Behind items */
+    z-index: 1;
+    /* Above background line but below items */
     box-shadow: 0 0 10px rgba(255, 87, 34, 0.4);
     /* Soft glow */
     transition: width 0.1s linear;
