@@ -50,7 +50,6 @@ export default function ProcessTimeline() {
     }, []);
 
     return (
-    return (
         <section ref={sectionRef} className={styles.section}>
             <div className={styles.stickyWrapper}>
                 <div className={styles.container}>
