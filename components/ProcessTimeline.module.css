@@ -1,8 +1,19 @@
 .section {
-    padding: var(--spacing-16) 0;
+    position: relative;
+    height: 400vh;
+    /* creates the scroll distance */
     background: #f8fafc;
     /* Light background to contrast with white cards */
+}
+
+.stickyWrapper {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container {
@@ -31,15 +42,20 @@
     color: var(--text-light);
 }
 
-.timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--spacing-8) 0;
+.timelineMask {
+    width: 100vw;
+    overflow: hidden;
+    padding: 20px 0;
+}
+
+.timelineTrack {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 20px;
+    align-items: center;
+    gap: 80px;
+    /* Space between steps */
+    padding-left: 20vw;
+    /* Start with first item slightly indented */
+    will-change: transform;
 }
 
 /* The horizontal central line */
