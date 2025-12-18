@@ -42,7 +42,7 @@ export default function Navbar() {
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
                     <span className={styles.logoIcon}>🏥</span>
-                    <span className={styles.logoText}>MedicTravel v2.0</span>
+                    <span className={styles.logoText}>MedicTravel</span>
                 </Link>
 
                 <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.active : ''}`}>
