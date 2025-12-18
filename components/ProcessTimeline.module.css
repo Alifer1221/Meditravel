@@ -59,80 +59,91 @@
 }
 
 /* The horizontal central line */
+/* The horizontal central line */
 .line {
     position: absolute;
-    top: 40px;
-    /* Aligned with markers */
+    top: 50%;
     left: 0;
     right: 0;
-    height: 2px;
-    width: 100%;
+    height: 4px;
+    width: 200%;
+    /* Ensure it spans the whole track */
     background: #e2e8f0;
+    transform: translateY(-50%);
     z-index: 0;
-}
-
-.progressLine {
-    position: absolute;
-    top: 40px;
-    /* Aligned with markers */
-    left: 0;
-    height: 2px;
-    width: 0;
-    /* Starts at 0, animated by JS */
-    background: linear-gradient(to right, #00C6FF, #0072ff);
-    z-index: 0;
-    transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .stepItem {
     position: relative;
+    min-width: 350px;
+    max-width: 400px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    flex: 1;
     z-index: 1;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity: 0.4;
+    transform: scale(0.9);
+    transition: all 0.5s ease;
 }
 
-.stepItem.visible {
+.stepItem.activeStep {
     opacity: 1;
-    transform: translateY(0);
+    transform: scale(1.05);
+}
+
+.stepItem.activeStep .marker {
+    background: var(--gradient-primary);
+    color: white;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.2);
+    border-color: transparent;
 }
 
 /* Containers */
 .content {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    /* Full width of the flex item */
-    padding: var(--spacing-4);
-    margin-top: 20px;
-    /* Space from marker */
+    margin-top: 30px;
+    position: relative;
 }
 
-.labelContainer {
-    width: 100%;
-    display: none;
-    /* Hide 'Step X' label if redundant, or style it */
+/* Connect card to line */
+.content::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
 }
 
-.stepLabel {
-    /* Optional styling if user wants it back */
-    font-size: var(--text-sm);
-    color: var(--text-light);
-}
-
-/* Marker Centering */
 .markerContainer {
     position: relative;
     z-index: 2;
-    margin-bottom: 10px;
-    height: 80px;
-    /* Fixed height for alignment */
+    background: #f8fafc;
+    /* Masks line behind */
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.marker {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #e2e8f0;
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: #64748b;
+    transition: all 0.3s ease;
 }
 
 /* The Card */
