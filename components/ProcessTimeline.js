@@ -12,78 +12,85 @@ export default function ProcessTimeline() {
     const lineRef = useRef(null);
     const [visibleSteps, setVisibleSteps] = useState([]);
 
+    const sectionRef = useRef(null);
+    const scrollContainerRef = useRef(null);
+    const [scrollProgress, setScrollProgress] = useState(0);
+
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        // Animate line width when section is visible
-                        if (lineRef.current) {
-                            lineRef.current.style.width = '100%';
-                        }
+        const handleScroll = () => {
+            if (!sectionRef.current) return;
 
-                        // Show all steps sequentially
-                        const steps = document.querySelectorAll(`.${styles.stepItem}`);
-                        steps.forEach((step, idx) => {
-                            setTimeout(() => {
-                                step.classList.add(styles.visible);
-                            }, idx * 200);
-                        });
-                    }
-                });
-            },
-            { threshold: 0.2 }
-        );
+            const rect = sectionRef.current.getBoundingClientRect();
+            const viewportHeight = window.innerHeight;
+            const sectionHeight = sectionRef.current.offsetHeight;
 
-        if (containerRef.current) {
-            observer.observe(containerRef.current);
-        }
+            // Calculate progress based on how much of the section has been scrolled
+            // We want the horizontal scroll to happen while the section is in view
+            const start = rect.top;
 
-        return () => observer.disconnect();
+            // Total scrollable distance within the section
+            const properScrollDistance = sectionHeight - viewportHeight;
+
+            // How far we've scrolled into the section (offset by when it hits top)
+            const scrolled = -start;
+
+            let progress = 0;
+            if (scrolled > 0 && properScrollDistance > 0) {
+                progress = scrolled / properScrollDistance;
+            }
+
+            // Clamp between 0 and 1
+            progress = Math.min(Math.max(progress, 0), 1);
+            setScrollProgress(progress);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     return (
-        <section className={styles.section}>
-            <div className={styles.container}>
-                <div className={styles.header}>
-                    <h2 className={styles.title}>{t.title}</h2>
-                    <p className={styles.subtitle}>{t.subtitle}</p>
-                </div>
+    return (
+        <section ref={sectionRef} className={styles.section}>
+            <div className={styles.stickyWrapper}>
+                <div className={styles.container}>
+                    <div className={styles.header}>
+                        <h2 className={styles.title}>{t.title}</h2>
+                        <p className={styles.subtitle}>{t.subtitle}</p>
+                    </div>
 
-                <div className={styles.timeline} ref={containerRef}>
-                    <div className={styles.line}></div>
-                    <div className={styles.progressLine} ref={lineRef}></div>
-
-                    {t.steps.map((step, index) => (
+                    <div className={styles.timelineMask}>
                         <div
-                            key={index}
-                            className={styles.stepItem}
+                            className={styles.timelineTrack}
+                            style={{ transform: `translateX(-${scrollProgress * 65}%)` }} // Adjusted percentage to ensure last item is visible but not overscrolled
+                            ref={scrollContainerRef}
                         >
-                            <div className={styles.markerContainer}>
-                                <div className={styles.marker}>
-                                    <span className={styles.arrowIcon}>→</span>
+                            <div className={styles.line}></div>
+
+                            {t.steps.map((step, index) => (
+                                <div
+                                    key={index}
+                                    className={`${styles.stepItem} ${Math.abs(scrollProgress * 4 - index) < 0.5 ? styles.activeStep : ''}`}
+                                >
+                                    <div className={styles.markerContainer}>
+                                        <div className={styles.marker}>
+                                            <span className={styles.stepNumber}>{index + 1}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className={styles.content}>
+                                        <div className={styles.card}>
+                                            <h3 className={styles.cardTitle}>{step.title}</h3>
+                                            <p className={styles.cardDesc}>{step.description}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-
-                            <div className={styles.content}>
-                                <h3 className={styles.cardTitle}>{step.title}</h3>
-                                <p className={styles.cardDesc}>{step.description}</p>
-                            </div>
-
-                            <div className={styles.labelContainer}>
-                                <span className={styles.stepLabel}>Step {index + 1}</span>
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-
-                {/* Call to Action */}
-                <div className={styles.ctaContainer}>
-                    <a href="/agenda" className={styles.ctaButton}>
-                        {language === 'es' ? "Agendar una cita para organizar tu plan de viaje" : "Schedule an appointment to organize your travel plan"}
-                    </a>
+                    </div>
                 </div>
             </div>
         </section>
+    );
     );
 }

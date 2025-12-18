@@ -100,14 +100,36 @@
 }
 
 /* Containers */
+/* Containers */
 .content {
+    width: 100%;
+    padding: var(--spacing-4);
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.card {
     background: white;
     padding: 30px;
     border-radius: 20px;
     box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
     width: 100%;
-    margin-top: 30px;
     position: relative;
+    text-align: center;
+}
+
+/* Connect card to line */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
 }
 
 /* Connect card to line */
@@ -144,6 +166,13 @@
     font-weight: 700;
     color: #64748b;
     transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.stepNumber {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: inherit;
 }
 
 /* The Card */
