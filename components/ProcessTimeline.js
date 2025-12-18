@@ -62,19 +62,23 @@ export default function ProcessTimeline() {
                         <div
                             className={styles.timelineTrack}
                             style={{
-                                // Centering formula: 
-                                // Start: Center of 1st item (200px) is at 50vw -> offset = 50vw - 200px
-                                // Move: Shift left by distance between centers * progress
-                                // Total shift = (NumItems - 1) * ItemWidth = 4 * 400 = 1600px
-                                transform: `translateX(calc(50vw - 200px - ${scrollProgress * (t.steps.length - 1) * 400}px))`
+                                // Entrance Effect:
+                                // At progress 0, Center of Step 1 is at 80vw (off-center to right)
+                                // As progress goes to 0.2 (approx), it settles at 50vw.
+                                // Then it pans normally.
+                                // Simplified: Start at 70vw.
+                                transform: `translateX(calc(70vw - 200px - ${scrollProgress * (t.steps.length) * 400}px))`
                             }}
                             ref={scrollContainerRef}
                         >
                             <div className={styles.line}></div>
                             <div
                                 className={styles.fillingLine}
-                                style={{ width: `${scrollProgress * (t.steps.length - 1) * 400}px` }}
-                            // Width fills the distance traveled
+                                style={{
+                                    // Make line start from "off screen" relative to track (track offset -100vw in CSS)
+                                    // Width needs to cover that gap + progress
+                                    width: `calc(100vw + ${scrollProgress * (t.steps.length) * 400}px)`
+                                }}
                             ></div>
 
                             {t.steps.map((step, index) => {
