@@ -1,0 +1,266 @@
+.main {
+    min-height: 100vh;
+}
+
+.loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 80px;
+}
+
+.hero {
+    position: relative;
+    height: 50vh;
+    min-height: 400px;
+    display: flex;
+    align-items: flex-end;
+}
+
+.heroImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.heroImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 50, 56, 0.95) 0%, rgba(0, 50, 56, 0.5) 50%, transparent 100%);
+}
+
+.heroContent {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--spacing-12) var(--spacing-6);
+    width: 100%;
+}
+
+.backLink {
+    display: inline-block;
+    color: var(--primary-300);
+    text-decoration: none;
+    font-size: var(--text-sm);
+    margin-bottom: var(--spacing-4);
+    transition: color var(--transition-fast);
+}
+
+.backLink:hover {
+    color: white;
+}
+
+.title {
+    font-size: var(--text-5xl);
+    font-weight: 800;
+    color: white;
+    margin-bottom: var(--spacing-4);
+}
+
+.subtitle {
+    font-size: var(--text-xl);
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 700px;
+    margin: 0;
+}
+
+.section {
+    padding: var(--spacing-16) 0;
+    background: var(--neutral-50);
+}
+
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-6);
+}
+
+.content {
+    max-width: 900px;
+}
+
+.description {
+    background: white;
+    padding: var(--spacing-8);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--spacing-8);
+}
+
+.description h2 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-4);
+    color: var(--neutral-900);
+}
+
+.description p {
+    color: var(--neutral-600);
+    line-height: 1.8;
+    margin: 0;
+}
+
+.procedures {
+    background: white;
+    padding: var(--spacing-8);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+    margin-bottom: var(--spacing-8);
+}
+
+.procedures h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-6);
+    color: var(--neutral-900);
+}
+
+.proceduresList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: var(--spacing-4);
+}
+
+.procedureItem {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    padding: var(--spacing-3) var(--spacing-4);
+    background: var(--primary-50);
+    border-radius: var(--radius-lg);
+    color: var(--neutral-700);
+    font-weight: 500;
+}
+
+.procedureIcon {
+    color: var(--primary-600);
+    font-weight: bold;
+}
+
+.clinicsSection {
+    margin-bottom: var(--spacing-8);
+}
+
+.clinicsSection h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-6);
+    color: var(--neutral-900);
+}
+
+.clinicsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--spacing-6);
+}
+
+.testimonialsSection {
+    margin-bottom: var(--spacing-8);
+}
+
+.testimonialsSection h3 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--spacing-6);
+    color: var(--neutral-900);
+}
+
+.testimonialsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+}
+
+.testimonialCard {
+    background: white;
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+}
+
+.testimonialText {
+    font-style: italic;
+    color: var(--neutral-600);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-4);
+}
+
+.testimonialAuthor {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+}
+
+.testimonialAuthor img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonialAuthor strong {
+    display: block;
+    color: var(--neutral-900);
+}
+
+.testimonialAuthor span {
+    font-size: var(--text-sm);
+    color: var(--neutral-500);
+}
+
+.cta {
+    background: var(--gradient-primary);
+    padding: var(--spacing-10);
+    border-radius: var(--radius-xl);
+    text-align: center;
+    color: white;
+}
+
+.cta h3 {
+    font-size: var(--text-2xl);
+    margin-bottom: var(--spacing-2);
+    color: white;
+}
+
+.cta p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--spacing-6);
+}
+
+.ctaButton {
+    display: inline-block;
+    background: white;
+    color: var(--primary-700);
+    padding: var(--spacing-3) var(--spacing-8);
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.ctaButton:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: var(--text-3xl);
+    }
+
+    .proceduresList {
+        grid-template-columns: 1fr;
+    }
+
+    .clinicsGrid {
+        grid-template-columns: 1fr;
+    }
+}

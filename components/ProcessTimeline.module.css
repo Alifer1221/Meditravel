@@ -1,0 +1,325 @@
+.section {
+    padding: var(--spacing-16) 0;
+    background: #f8fafc;
+    /* Light background to contrast with white cards */
+    overflow: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-16);
+}
+
+.title {
+    font-size: var(--text-4xl);
+    color: var(--primary-900);
+    margin-bottom: var(--spacing-4);
+    font-weight: 800;
+}
+
+.subtitle {
+    font-size: var(--text-xl);
+    color: var(--text-light);
+}
+
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-8) 0;
+}
+
+/* The vertical central line */
+.line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #e2e8f0;
+    transform: translateX(-50%);
+    z-index: 0;
+}
+
+.progressLine {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    background: linear-gradient(to bottom, #00C6FF, #0072ff);
+    transform: translateX(-50%);
+    z-index: 0;
+    height: 0;
+    transition: height 0.1s linear;
+}
+
+.stepItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-6);
+    /* Reduced from spacing-12 for closer steps */
+    width: 100%;
+    z-index: 1;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stepItem.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stepItem:last-child {
+    margin-bottom: 0;
+}
+
+/* Base containers */
+.content {
+    width: 50%;
+    padding: 0 var(--spacing-12);
+}
+
+.labelContainer {
+    width: 50%;
+    padding: 0 var(--spacing-12);
+    display: flex;
+    align-items: center;
+}
+
+.stepLabel {
+    font-size: var(--text-xl);
+    font-weight: 600;
+    color: var(--primary-600);
+}
+
+/* Alternating Logic */
+.left {
+    flex-direction: row;
+}
+
+.left .content {
+    text-align: right;
+}
+
+.left .labelContainer {
+    justify-content: flex-start;
+    /* Label on right side */
+}
+
+.right {
+    flex-direction: row-reverse;
+}
+
+.right .content {
+    text-align: left;
+}
+
+.right .labelContainer {
+    justify-content: flex-end;
+    /* Label on left side */
+}
+
+/* The Card */
+.card {
+    background: white;
+    padding: var(--spacing-8);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.cardTitle {
+    font-size: var(--text-2xl);
+    color: var(--primary-800);
+    margin-bottom: var(--spacing-3);
+    font-weight: 700;
+}
+
+.cardDesc {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* Arrow/Triangle pointing to center */
+.card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    transform: translateY(-50%);
+}
+
+.left .card::after {
+    right: -10px;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+}
+
+.right .card::after {
+    left: -10px;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+/* Center Marker (Red Circle with Arrow) */
+.markerContainer {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 10px 0;
+    z-index: 2;
+}
+
+.marker {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border: 2px solid #cbd5e1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #cbd5e1;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 0 4px white;
+}
+
+.activeMarker {
+    background: linear-gradient(135deg, #ff4d4d, #f9cb28);
+    border-color: transparent;
+    color: white;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    box-shadow: 0 0 0 4px white, 0 0 25px rgba(255, 77, 77, 0.6);
+}
+
+.arrowIcon {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes popIn {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
+
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .line {
+        left: 20px;
+        /* Line moves to left */
+    }
+
+    .stepItem,
+    .left,
+    .right {
+        flex-direction: column;
+        /* Stack vertically, text below marker implies custom handling, but usually cards go right of line */
+        align-items: flex-start;
+        padding-left: 50px;
+        /* Space for line */
+    }
+
+    .content,
+    .labelContainer {
+        width: 100%;
+        text-align: left !important;
+        /* Force left align */
+        padding: 0;
+    }
+
+    .labelContainer {
+        margin-bottom: var(--spacing-2);
+        order: -1;
+        /* Label above card */
+        justify-content: flex-start !important;
+    }
+
+    .stepLabel {
+        font-size: var(--text-sm);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .markerContainer {
+        left: 20px;
+        /* Align with line */
+        transform: translateX(-50%);
+        top: 0;
+        /* Align with label/top */
+    }
+
+    .card::after {
+        display: none;
+        /* Remove arrow on mobile */
+    }
+}
+
+/* Call to Action */
+.ctaContainer {
+    margin-top: var(--spacing-16);
+    text-align: center;
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+    animation-delay: 0.5s;
+}
+
+.ctaButton {
+    display: inline-block;
+    background: var(--gradient-primary);
+    color: white;
+    font-size: var(--text-lg);
+    font-weight: 700;
+    padding: var(--spacing-4) var(--spacing-12);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.ctaButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 35px -5px rgba(14, 165, 233, 0.6);
+    filter: brightness(1.1);
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}

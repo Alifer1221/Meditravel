@@ -1,0 +1,94 @@
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--spacing-4) 0;
+}
+
+.carouselTrack {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: var(--spacing-6);
+    padding: var(--spacing-4) var(--spacing-2);
+    -webkit-overflow-scrolling: touch;
+    /* iOS Momentum Scrolling */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.carouselTrack::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari/Opera */
+}
+
+.carouselItem {
+    flex: 0 0 calc(33.333% - var(--spacing-4));
+    /* 3 items per view minus gap */
+    scroll-snap-align: start;
+    min-width: 300px;
+}
+
+/* Navigation Buttons */
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--neutral-200);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    font-size: var(--text-xl);
+    color: var(--primary-600);
+    transition: all 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.carouselContainer:hover .navButton {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.navButton:hover {
+    background: var(--primary-500);
+    color: white;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prevButton {
+    left: var(--spacing-2);
+}
+
+.nextButton {
+    right: var(--spacing-2);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .carouselItem {
+        flex: 0 0 calc(50% - var(--spacing-3));
+        /* 2 items */
+    }
+}
+
+@media (max-width: 768px) {
+    .carouselItem {
+        flex: 0 0 85%;
+        /* 1 item partially visible */
+        min-width: 280px;
+    }
+
+    .navButton {
+        display: none;
+        /* Hide buttons on mobile, use swipe */
+    }
+}
