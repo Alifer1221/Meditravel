@@ -165,7 +165,7 @@ export default function ChatAssistant() {
                         alt="Chat Médico Online"
                         width="65"
                         height="65"
-                        style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }}
+                        style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                     />
                 )}
                 {!isOpen && (sessionId || pendingSessionId) && <span className={styles.badge}></span>}

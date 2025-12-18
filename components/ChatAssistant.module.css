@@ -26,19 +26,19 @@
     width: 65px;
     height: 65px;
     border-radius: 50%;
-    background: transparent;
-    /* Removed purple background */
+    background: #eff6ff;
+    /* Very clear/light blue */
     border: none;
     cursor: pointer;
     z-index: 9999;
-    padding: 0;
-    /* Ensure no padding */
+    padding: 10px;
+    /* Add padding so icon isn't edge-to-edge */
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
-    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
-    /* Optional subtle shadow for the icon itself */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* Restored shadow for depth */
 }
 
 .fab:hover {
