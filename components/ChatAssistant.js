@@ -13,6 +13,10 @@ export default function ChatAssistant() {
 
     // Resume/Restart State
     const [showResumeOption, setShowResumeOption] = useState(false);
+
+    // Cache buster log
+    useEffect(() => { console.log("ChatAssistant Loaded - Icon Version: Doctor Silhouette v3"); }, []);
+
     const [pendingSessionId, setPendingSessionId] = useState(null);
 
     // Registration State
@@ -150,7 +154,20 @@ export default function ChatAssistant() {
         <>
             {/* Floating Bubble */}
             <button className={styles.fab} onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? '✕' : '💬'}
+                {isOpen ? (
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                ) : (
+                    <img
+                        src="/doctor-icon.png"
+                        alt="Chat con Doctor"
+                        width="40"
+                        height="40"
+                        style={{ objectFit: 'contain' }}
+                    />
+                )}
                 {!isOpen && (sessionId || pendingSessionId) && <span className={styles.badge}></span>}
             </button>
 
@@ -166,84 +183,86 @@ export default function ChatAssistant() {
                     </div>
                 </div>
 
-                {showResumeOption ? (
-                    /* Resume/Restart Selection */
-                    <div className={styles.registerContainer}>
-                        <p className={styles.welcomeText}>
-                            Hola de nuevo. ¿Deseas continuar tu conversación anterior?
-                        </p>
-                        <div className={styles.resumeActions}>
-                            <button onClick={handleResume} className={styles.resumeButton}>
-                                Continuar Chat
-                            </button>
-                            <button onClick={handleRestart} className={styles.restartButton}>
-                                Iniciar Nuevo
-                            </button>
+                {
+                    showResumeOption ? (
+                        /* Resume/Restart Selection */
+                        <div className={styles.registerContainer}>
+                            <p className={styles.welcomeText}>
+                                Hola de nuevo. ¿Deseas continuar tu conversación anterior?
+                            </p>
+                            <div className={styles.resumeActions}>
+                                <button onClick={handleResume} className={styles.resumeButton}>
+                                    Continuar Chat
+                                </button>
+                                <button onClick={handleRestart} className={styles.restartButton}>
+                                    Iniciar Nuevo
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                ) : !sessionId ? (
-                    /* Registration Form */
-                    <div className={styles.registerContainer}>
-                        <p className={styles.welcomeText}>
-                            Por favor ingresa tus datos para iniciar una conversación privada con un asesor.
-                        </p>
-                        <form onSubmit={handleRegister} className={styles.registerForm}>
-                            <input
-                                required
-                                type="text"
-                                placeholder="Tu Nombre"
-                                value={regName}
-                                onChange={(e) => setRegName(e.target.value)}
-                                className={styles.input}
-                            />
-                            <input
-                                required
-                                type="email"
-                                placeholder="Tu Correo"
-                                value={regEmail}
-                                onChange={(e) => setRegEmail(e.target.value)}
-                                className={styles.input}
-                            />
-                            <button type="submit" className={styles.registerButton} disabled={isRegistering}>
-                                {isRegistering ? 'Conectando...' : 'Iniciar Chat'}
-                            </button>
-                        </form>
-                    </div>
-                ) : (
-                    /* Active Chat */
-                    <>
-                        <div className={styles.messagesContainer}>
-                            {messages.map((msg) => (
-                                <div
-                                    key={msg.id}
-                                    className={`${styles.message} ${msg.sender === 'admin' || msg.sender === 'system' ? styles.admin : styles.user}`}
-                                >
-                                    {msg.text}
-                                </div>
-                            ))}
-                            {isAdminTyping && (
-                                <div className={styles.typingIndicator}>
-                                    <div className={styles.dot}></div>
-                                    <div className={styles.dot}></div>
-                                    <div className={styles.dot}></div>
-                                </div>
-                            )}
-                            <div ref={messagesEndRef} />
+                    ) : !sessionId ? (
+                        /* Registration Form */
+                        <div className={styles.registerContainer}>
+                            <p className={styles.welcomeText}>
+                                Por favor ingresa tus datos para iniciar una conversación privada con un asesor.
+                            </p>
+                            <form onSubmit={handleRegister} className={styles.registerForm}>
+                                <input
+                                    required
+                                    type="text"
+                                    placeholder="Tu Nombre"
+                                    value={regName}
+                                    onChange={(e) => setRegName(e.target.value)}
+                                    className={styles.input}
+                                />
+                                <input
+                                    required
+                                    type="email"
+                                    placeholder="Tu Correo"
+                                    value={regEmail}
+                                    onChange={(e) => setRegEmail(e.target.value)}
+                                    className={styles.input}
+                                />
+                                <button type="submit" className={styles.registerButton} disabled={isRegistering}>
+                                    {isRegistering ? 'Conectando...' : 'Iniciar Chat'}
+                                </button>
+                            </form>
                         </div>
+                    ) : (
+                        /* Active Chat */
+                        <>
+                            <div className={styles.messagesContainer}>
+                                {messages.map((msg) => (
+                                    <div
+                                        key={msg.id}
+                                        className={`${styles.message} ${msg.sender === 'admin' || msg.sender === 'system' ? styles.admin : styles.user}`}
+                                    >
+                                        {msg.text}
+                                    </div>
+                                ))}
+                                {isAdminTyping && (
+                                    <div className={styles.typingIndicator}>
+                                        <div className={styles.dot}></div>
+                                        <div className={styles.dot}></div>
+                                        <div className={styles.dot}></div>
+                                    </div>
+                                )}
+                                <div ref={messagesEndRef} />
+                            </div>
 
-                        <form onSubmit={handleSend} className={styles.inputArea}>
-                            <input
-                                type="text"
-                                value={inputText}
-                                onChange={(e) => setInputText(e.target.value)}
-                                placeholder="Escribe tu consulta..."
-                                className={styles.input}
-                            />
-                            <button type="submit" className={styles.sendButton}>➤</button>
-                        </form>
-                    </>
-                )}
-            </div>
+                            <form onSubmit={handleSend} className={styles.inputArea}>
+                                <input
+                                    type="text"
+                                    value={inputText}
+                                    onChange={(e) => setInputText(e.target.value)}
+                                    placeholder="Escribe tu consulta..."
+                                    className={styles.input}
+                                />
+                                <button type="submit" className={styles.sendButton}>➤</button>
+                            </form>
+                        </>
+                    )
+                }
+            </div >
         </>
     );
 }

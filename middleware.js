@@ -10,13 +10,26 @@ export function middleware(request) {
     // Check for admin session cookie
     const token = request.cookies.get('admin_session');
 
-    // If trying to access admin pages (not login) without token
-    if (isProtected && !isLogin && !token) {
-        return NextResponse.redirect(new URL('/admin/login', request.url));
+    // Authorization Logic
+    if (isProtected && !isLogin) {
+        if (!token) {
+            return NextResponse.redirect(new URL('/admin/login', request.url));
+        }
+
+        const role = token.value;
+
+        // Block 'chat_only' users from accessing anything except /admin/chat
+        if (role === 'chat_only' && path !== '/admin/chat') {
+            return NextResponse.redirect(new URL('/admin/chat', request.url));
+        }
     }
 
-    // If trying to access login page WITH token, redirect to dashboard
+    // Role-based login redirection
     if (isLogin && token) {
+        const role = token.value;
+        if (role === 'chat_only') {
+            return NextResponse.redirect(new URL('/admin/chat', request.url));
+        }
         return NextResponse.redirect(new URL('/admin', request.url));
     }
 

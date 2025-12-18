@@ -72,31 +72,59 @@ export async function POST(request) {
 
     // 1. REGISTER
     if (action === 'register') {
-        const newSessionId = Date.now().toString() + Math.random().toString(36).substring(7);
-        const initialMessage = {
+        const sessionId = Date.now().toString() + Math.random().toString(36).substring(7);
+
+        // Initial welcome message
+        const welcomeMessage = {
             id: Date.now(),
+            text: `Hola ${name}, bienvenido a nuestro soporte. ¿En qué podemos ayudarte hoy?`,
             sender: 'system',
-            text: `Hola ${name}, un agente se unirá pronto.`,
             timestamp: Date.now()
         };
 
         if (db) {
-            await ChatSession.create({
-                sessionId: newSessionId,
-                user: { name, email, ip },
-                messages: [initialMessage],
-                lastActive: Date.now(),
-                isAdminTyping: false
-            });
+            // Check if user with this email already exists
+            let existingSession = await ChatSession.findOne({ "user.email": email });
+
+            if (existingSession) {
+                // Reuse existing session: Reset messages and update info
+                existingSession.messages = [welcomeMessage];
+                existingSession.user.name = name; // Update name in case it changed
+                existingSession.user.ip = ip;
+                existingSession.lastActive = Date.now();
+                existingSession.isAdminTyping = false;
+
+                await existingSession.save();
+
+                return NextResponse.json({
+                    success: true,
+                    sessionId: existingSession.sessionId,
+                    message: 'Session resumed and reset'
+                });
+            } else {
+                // Create new session if email not found
+                await ChatSession.create({
+                    sessionId,
+                    user: { name, email, ip },
+                    messages: [welcomeMessage],
+                    lastActive: Date.now(),
+                    isAdminTyping: false
+                });
+                return NextResponse.json({ success: true, sessionId });
+            }
         } else {
-            memorySessions[newSessionId] = {
+            // Fallback for memory (dev mode without DB)
+            // Note: In memory, we might not efficiently search by email given the structure, 
+            // but the main goal is DB deduplication.
+            memorySessions[sessionId] = {
+                sessionId,
                 user: { name, email, ip },
-                messages: [initialMessage],
+                messages: [welcomeMessage],
                 lastActive: Date.now(),
                 isAdminTyping: false
             };
+            return NextResponse.json({ success: true, sessionId });
         }
-        return NextResponse.json({ success: true, sessionId: newSessionId });
     }
 
     // 2. MESSAGE

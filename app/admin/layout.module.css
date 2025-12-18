@@ -97,6 +97,27 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.logoutBtn {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: left;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .backLink {
     display: block;
     padding: var(--spacing-3) var(--spacing-4);

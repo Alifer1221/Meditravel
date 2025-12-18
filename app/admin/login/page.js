@@ -24,8 +24,8 @@ export default function LoginPage() {
             const data = await res.json();
 
             if (data.success) {
-                router.push('/admin');
-                router.refresh();
+                // Use hard redirect to ensure cookies are fully propagated
+                window.location.href = '/admin';
             } else {
                 setError(data.message || 'Credenciales inválidas');
             }

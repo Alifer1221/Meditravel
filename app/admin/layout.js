@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './layout.module.css';
@@ -9,15 +9,42 @@ export default function AdminLayout({ children }) {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const pathname = usePathname();
 
-    const navItems = [
-        { href: '/admin', label: 'Dashboard', icon: '📊' },
-        { href: '/admin/especialidades', label: 'Especialidades', icon: '🏥' },
-        { href: '/admin/clinicas', label: 'Clínicas', icon: '🏛️' },
-        { href: '/admin/revista', label: 'Revista', icon: '📰' },
-        { href: '/admin/testimonios', label: 'Testimonios', icon: '💬' },
-        { href: '/admin/chat', label: 'Chat Soporte', icon: '🎧' },
-        { href: '/admin/users', label: 'Base de Datos', icon: '👥' },
+    const [userRole, setUserRole] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        // Read role from cookie
+        const match = document.cookie.match(new RegExp('(^| )user_role=([^;]+)'));
+        if (match) {
+            setUserRole(match[2]);
+        }
+        setIsLoading(false);
+    }, []);
+
+    // Hide sidebar for login page
+    if (pathname === '/admin/login') {
+        return <>{children}</>;
+    }
+
+    const handleLogout = async () => {
+        await fetch('/api/auth/logout', { method: 'POST' });
+        window.location.href = '/admin/login';
+    };
+
+    const allNavItems = [
+        { href: '/admin', label: 'Dashboard', icon: '📊', roles: ['admin'] },
+        { href: '/admin/especialidades', label: 'Especialidades', icon: '🏥', roles: ['admin'] },
+        { href: '/admin/clinicas', label: 'Clínicas', icon: '🏛️', roles: ['admin'] },
+        { href: '/admin/revista', label: 'Revista', icon: '📰', roles: ['admin'] },
+        { href: '/admin/testimonios', label: 'Testimonios', icon: '💬', roles: ['admin'] },
+        { href: '/admin/chat', label: 'Chat Soporte', icon: '🎧', roles: ['admin', 'chat_only'] },
+        { href: '/admin/users', label: 'Base de Datos', icon: '👥', roles: ['admin'] },
     ];
+
+    // Fail Closed: If loading or no role found, show nothing (or strict filter)
+    const navItems = allNavItems.filter(item =>
+        !isLoading && userRole && item.roles.includes(userRole)
+    );
 
     return (
         <div className={styles.layout}>
@@ -50,6 +77,9 @@ export default function AdminLayout({ children }) {
                 </nav>
 
                 <div className={styles.sidebarFooter}>
+                    <button onClick={handleLogout} className={styles.logoutBtn}>
+                        🚪 Cerrar Sesión
+                    </button>
                     <Link href="/" className={styles.backLink}>
                         ← Volver al Sitio
                     </Link>
