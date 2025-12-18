@@ -247,6 +247,44 @@
     gap: 16px;
 }
 
+/* Resume/Restart Styles */
+.resumeActions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.resumeButton {
+    background: #2563eb;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.resumeButton:hover {
+    background: #1d4ed8;
+}
+
+.restartButton {
+    background: white;
+    color: #ef4444;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ef4444;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.restartButton:hover {
+    background: #fef2f2;
+}
+
 .registerButton {
     background: #3b82f6;
     color: white;

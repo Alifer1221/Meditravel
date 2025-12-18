@@ -5,6 +5,8 @@ import ChatSession from '@/models/ChatSession';
 // Fallback in-memory store (for when DB is not configured)
 let memorySessions = {};
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const isAdmin = searchParams.get('admin') === 'true';

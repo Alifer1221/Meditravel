@@ -11,6 +11,10 @@ export default function ChatAssistant() {
     const [inputText, setInputText] = useState('');
     const [isAdminTyping, setIsAdminTyping] = useState(false); // Typing state
 
+    // Resume/Restart State
+    const [showResumeOption, setShowResumeOption] = useState(false);
+    const [pendingSessionId, setPendingSessionId] = useState(null);
+
     // Registration State
     const [regName, setRegName] = useState('');
     const [regEmail, setRegEmail] = useState('');
@@ -23,7 +27,8 @@ export default function ChatAssistant() {
     useEffect(() => {
         const storedId = localStorage.getItem('chat_session_id');
         if (storedId) {
-            setSessionId(storedId);
+            setPendingSessionId(storedId);
+            setShowResumeOption(true);
         }
     }, []);
 
@@ -36,13 +41,13 @@ export default function ChatAssistant() {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     };
 
-    // Poll for messages (Only if registered)
+    // Poll for messages (Only if active session)
     useEffect(() => {
         if (!sessionId) return;
 
         const fetchMessages = async () => {
             try {
-                const res = await fetch(`/api/chat?sessionId=${sessionId}`);
+                const res = await fetch(`/api/chat?sessionId=${sessionId}`, { cache: 'no-store' });
 
                 if (res.status === 404) {
                     // Session invalid/expired (e.g. DB clear) -> Reset to show Form
@@ -79,6 +84,19 @@ export default function ChatAssistant() {
             scrollToBottom();
         }
     }, [messages, isOpen, isAdminTyping, sessionId]); // Scroll when typing changes too
+
+    const handleResume = () => {
+        setSessionId(pendingSessionId);
+        setShowResumeOption(false);
+    };
+
+    const handleRestart = () => {
+        localStorage.removeItem('chat_session_id');
+        setPendingSessionId(null);
+        setSessionId(null);
+        setShowResumeOption(false);
+        setMessages([]);
+    };
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -133,7 +151,7 @@ export default function ChatAssistant() {
             {/* Floating Bubble */}
             <button className={styles.fab} onClick={() => setIsOpen(!isOpen)}>
                 {isOpen ? '✕' : '💬'}
-                {!isOpen && sessionId && messages.length > 0 && <span className={styles.badge}></span>}
+                {!isOpen && (sessionId || pendingSessionId) && <span className={styles.badge}></span>}
             </button>
 
             {/* Chat Window */}
@@ -148,7 +166,22 @@ export default function ChatAssistant() {
                     </div>
                 </div>
 
-                {!sessionId ? (
+                {showResumeOption ? (
+                    /* Resume/Restart Selection */
+                    <div className={styles.registerContainer}>
+                        <p className={styles.welcomeText}>
+                            Hola de nuevo. ¿Deseas continuar tu conversación anterior?
+                        </p>
+                        <div className={styles.resumeActions}>
+                            <button onClick={handleResume} className={styles.resumeButton}>
+                                Continuar Chat
+                            </button>
+                            <button onClick={handleRestart} className={styles.restartButton}>
+                                Iniciar Nuevo
+                            </button>
+                        </div>
+                    </div>
+                ) : !sessionId ? (
                     /* Registration Form */
                     <div className={styles.registerContainer}>
                         <p className={styles.welcomeText}>
