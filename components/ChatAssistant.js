@@ -161,8 +161,8 @@ export default function ChatAssistant() {
                     </svg>
                 ) : (
                     <img
-                        src="/doctor-avatar-v2.png"
-                        alt="Chat con Doctor"
+                        src="/doctor-avatar-v2.png?v=3"
+                        alt="Chat Médico Online"
                         width="40"
                         height="40"
                         style={{ objectFit: 'contain' }}
