@@ -6,7 +6,7 @@
     background: #366193;
     /* Accurate Reference Blue */
     padding: 4rem 0;
-    overflow: visible;
+    overflow: hidden;
     font-family: 'Inter', sans-serif;
 }
 
@@ -212,11 +212,13 @@
     transform: translateY(-50%);
 
     /* Alignment within the grid cell */
-    justify-self: center;
+    justify-self: end;
     align-self: start;
 
     z-index: 50;
     height: auto;
+    max-width: 100%;
+    overflow: visible;
 }
 
 .timelineItem {
