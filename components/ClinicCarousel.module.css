@@ -81,7 +81,7 @@
     transition: all 0.3s ease;
 }
 
-.carouselContainer:hover .navButton {
+.navButton.show {
     opacity: 1;
     pointer-events: auto;
 }

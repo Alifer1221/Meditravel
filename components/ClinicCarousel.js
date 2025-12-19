@@ -8,6 +8,7 @@ export default function ClinicCarousel({ clinics }) {
     const trackRef = useRef(null);
 
     const [activeIndex, setActiveIndex] = useState(0);
+    const [showNav, setShowNav] = useState(false);
 
     const scroll = (direction) => {
         if (trackRef.current) {
@@ -20,8 +21,10 @@ export default function ClinicCarousel({ clinics }) {
     const scrollToSlide = (index) => {
         if (trackRef.current) {
             const cardWidth = trackRef.current.children[0]?.offsetWidth || 300;
-            const gap = 24; // var(--spacing-6) is roughly 24px (1.5rem)
-            const scrollPos = index * (cardWidth + gap);
+            const gap = 0; // Gap is removed in CSS
+            // Correction for negative margin? Overlap is 25px.
+            // Simplified scroll logic for now
+            const scrollPos = index * (cardWidth - 25);
             trackRef.current.scrollTo({ left: scrollPos, behavior: 'smooth' });
             setActiveIndex(index);
         }
@@ -32,18 +35,21 @@ export default function ClinicCarousel({ clinics }) {
         if (trackRef.current) {
             const scrollLeft = trackRef.current.scrollLeft;
             const cardWidth = trackRef.current.children[0]?.offsetWidth || 300;
-            const gap = 24;
-            const index = Math.round(scrollLeft / (cardWidth + gap));
+            const index = Math.round(scrollLeft / (cardWidth - 25));
             setActiveIndex(index);
         }
     };
 
     return (
-        <div className={styles.carouselContainer}>
+        <div
+            className={styles.carouselContainer}
+            onMouseEnter={() => setShowNav(true)}
+            onMouseLeave={() => setShowNav(false)}
+        >
             {/* Left Arrow */}
             <button
                 onClick={() => scroll('left')}
-                className={`${styles.navButton} ${styles.prevButton}`}
+                className={`${styles.navButton} ${styles.prevButton} ${showNav ? styles.show : ''}`}
                 aria-label="Previous"
             >
                 ←
@@ -70,13 +76,13 @@ export default function ClinicCarousel({ clinics }) {
             {/* Right Arrow */}
             <button
                 onClick={() => scroll('right')}
-                className={`${styles.navButton} ${styles.nextButton}`}
+                className={`${styles.navButton} ${styles.nextButton} ${showNav ? styles.show : ''}`}
                 aria-label="Next"
             >
                 →
             </button>
 
-            {/* Pagination Dots */}
+            {/* Pagination Dots - Keep mostly visible or outside hover logic? User didn't specify. */}
             <div className={styles.pagination}>
                 {clinics.map((_, index) => (
                     <button
