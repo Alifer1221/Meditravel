@@ -217,10 +217,10 @@
     backdrop-filter: blur(4px);
     border: 1px solid rgba(255, 255, 255, 0.6);
     color: white;
-    width: 56px;
-    /* Reduced from 64px */
-    height: 56px;
-    /* Reduced from 64px */
+    width: 48px;
+    /* Reduced to 48px */
+    height: 48px;
+    /* Reduced to 48px */
     border-radius: 50%;
     display: flex !important;
     align-items: center;
