@@ -2,9 +2,10 @@
     position: relative;
     height: 350vh;
     /* Long scroll area to accommodate 5 steps comfortably */
-    background: #fdfbf7;
-    /* Creamy background similar to reference */
+    background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
+    /* Blue Theme */
     padding: 0;
+    overflow: hidden;
 }
 
 .stickyWrapper {
@@ -38,22 +39,51 @@
     justify-content: center;
     position: relative;
     padding-right: 2rem;
+    color: white;
+    /* White text on blue bg */
+    z-index: 10;
 }
 
 .title {
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
-    color: #1e293b;
-    /* Slate 800 */
+    color: white;
     line-height: 1.1;
     margin-bottom: 2rem;
     letter-spacing: -0.02em;
+    font-family: var(--font-display), sans-serif;
 }
 
-/* Highlight word styling if needed */
-.highlight {
-    color: #0d9488;
-    /* Teal */
+/* Feature List (Checkmarks) */
+.featureList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.checkIcon {
+    min-width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c5282;
+    /* Blue text inside check */
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 2px;
 }
 
 /* RIGHT COLUMN: The Dynamic Card */
@@ -68,29 +98,44 @@
 .cardWrapper {
     position: relative;
     width: 100%;
-    max-width: 550px;
+    max-width: 500px;
     aspect-ratio: 1/1;
-    /* Square-ish card like reference */
-    max-height: 600px;
+    max-height: 550px;
     perspective: 1000px;
 }
 
 .card {
     position: absolute;
     inset: 0;
-    background: #ffffff;
-    border-radius: 2.5rem;
+    background: #fdfbf7;
+    /* Cream / Beige */
+    border-radius: 2rem;
     padding: 4rem 3rem;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border: none;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     opacity: 0;
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(40px) scale(0.9);
     pointer-events: none;
+    z-index: 2;
+    /* Content above images */
+}
+
+/* Decorative Image behind Card (The "Dog" equivalent placeholder) */
+.cardImageBase {
+    position: absolute;
+    top: -30px;
+    left: -20px;
+    right: -20px;
+    bottom: -10px;
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.1);
     z-index: 1;
+    transform: rotate(-3deg);
+    transition: all 0.6s ease;
 }
 
 .card.activeCard {
@@ -106,24 +151,24 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #fca5a5;
-    /* Light Red/Orange placeholder */
+    color: #1a4d2e;
+    /* Dark Green header text */
     margin-bottom: 1.5rem;
-    color: #ff5722;
-    /* Brand Orange */
 }
 
 .cardTitle {
     font-size: 3rem;
     font-weight: 800;
-    color: #0f172a;
+    color: #1a4d2e;
+    /* Dark Green Title */
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    font-family: var(--font-outfit), sans-serif;
+    font-family: serif;
+    /* Elegant Serif */
 }
 
 .cardDesc {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     color: #475569;
     /* Slate 600 */
     line-height: 1.6;
@@ -133,13 +178,11 @@
 .timelineSidebar {
     position: absolute;
     right: 2rem;
-    /* Stick to right edge of container */
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     height: 60%;
-    /* Occupy middle height */
     justify-content: space-between;
     z-index: 20;
 }
@@ -149,9 +192,9 @@
     top: 10px;
     bottom: 10px;
     right: 9px;
-    /* Center with dots */
     width: 2px;
-    background: #e2e8f0;
+    background: rgba(255, 255, 255, 0.3);
+    /* Transparent White */
     z-index: 0;
 }
 
@@ -180,11 +223,11 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #ffffff;
-    border: 3px solid #cbd5e1;
+    background: #2c5282;
+    /* Blue center */
+    border: 3px solid white;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 0 0 4px #fdfbf7;
-    /* Mask track */
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0);
 }
 
 .dot.activeDot {
@@ -200,7 +243,7 @@
     border-radius: 9999px;
     font-weight: 700;
     font-size: 0.875rem;
-    box-shadow: 0 4px 6px -1px rgba(255, 87, 34, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 
     /* Animation In/Out */
     opacity: 0;
@@ -217,11 +260,11 @@
     transform: translateX(0);
 }
 
+/* Mobile Responsiveness */
 .mobileList {
     display: none;
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 1024px) {
     .container {
         grid-template-columns: 1fr;
@@ -233,10 +276,16 @@
     .leftColumn {
         text-align: center;
         padding-right: 0;
+        align-items: center;
+        /* Center list items */
     }
 
     .title {
         font-size: 3rem;
+    }
+
+    .featureItem {
+        text-align: left;
     }
 
     .rightColumn {
@@ -251,15 +300,10 @@
 
     .timelineSidebar {
         display: none;
-        /* Hide complex timeline on tablet/mobile, use swipe or stack? 
-                        For now, sticky might break on small screens. */
     }
 }
 
 @media (max-width: 768px) {
-
-    /* Reset to vertical stack for mobile is safer, 
-       but if we stick to sticky, we need to ensure content fits viewport */
     .section {
         height: auto;
     }
@@ -283,7 +327,6 @@
 
     .rightColumn {
         display: none;
-        /* Hide the sticky card mechanism */
     }
 
     /* Fallback Mobile List */
@@ -292,6 +335,7 @@
         flex-direction: column;
         gap: 2rem;
         width: 100%;
+        padding: 0 1rem;
     }
 
     .mobileCard {
