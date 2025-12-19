@@ -21,7 +21,7 @@ export default function Home() {
 
   // Fetch data based on current language
   const specialties = getSpecialties(language).slice(0, 6);
-  const clinics = getClinics(language).slice(0, 3);
+  const clinics = getClinics(language).slice(0, 6);
   const testimonials = getTestimonials(language).slice(0, 3);
 
   return (
