@@ -74,18 +74,7 @@ export default function ProcessTimeline() {
                         </div>
                     </div>
 
-                    <a href="/agenda" className={styles.ctaButton} style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        background: '#00b4cc',
-                        color: '#ffffff',
-                        padding: '1rem 2rem',
-                        borderRadius: '50px',
-                        fontWeight: '800',
-                        textDecoration: 'none',
-                        width: 'fit-content',
-                        boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
-                    }}>
+                    <a href="/agenda" className={styles.ctaButton}>
                         {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')} {' >'}
                     </a>
                 </div>
