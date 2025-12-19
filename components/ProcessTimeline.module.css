@@ -150,7 +150,7 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: #1a4d2e;
+    color: var(--neutral-500);
     margin-bottom: 0.5rem;
     opacity: 0.8;
     font-family: var(--font-primary);
@@ -160,7 +160,7 @@
     font-family: var(--font-display);
     font-size: 3.2rem;
     font-weight: 700;
-    color: #1a4d2e;
+    color: var(--neutral-800);
     line-height: 1.05;
     margin-bottom: 2rem;
     letter-spacing: -0.01em;
@@ -181,21 +181,21 @@
 .cardListNum {
     font-family: var(--font-display);
     font-weight: 700;
-    color: #1a4d2e;
+    color: var(--neutral-800);
     font-size: 1.1rem;
 }
 
 .cardListText {
     flex: 1;
     font-size: 1rem;
-    color: #3f624e;
+    color: var(--neutral-500);
     line-height: 1.4;
     font-family: var(--font-primary);
 }
 
 .cardListText strong {
     display: block;
-    color: #1a4d2e;
+    color: var(--neutral-800);
     font-weight: 700;
     margin-bottom: 0.2rem;
 }
