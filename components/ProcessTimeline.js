@@ -8,13 +8,13 @@ import styles from './ProcessTimeline.module.css';
 export default function ProcessTimeline() {
     const { language } = useLanguage();
     const t = translations[language].timeline;
-    const containerRef = useRef(null);
-    const lineRef = useRef(null);
-    const [visibleSteps, setVisibleSteps] = useState([]);
 
     const sectionRef = useRef(null);
-    const scrollContainerRef = useRef(null);
+    const [activeStep, setActiveStep] = useState(0);
     const [scrollProgress, setScrollProgress] = useState(0);
+
+    // Dynamic Words for Title (optional, matching Hero style?) 
+    // Just static title for now based on CSS.
 
     useEffect(() => {
         const handleScroll = () => {
@@ -24,98 +24,117 @@ export default function ProcessTimeline() {
             const viewportHeight = window.innerHeight;
             const sectionHeight = sectionRef.current.offsetHeight;
 
-            // Calculate progress based on how much of the section has been scrolled
-            // We want the horizontal scroll to happen while the section is in view
-            const start = rect.top;
+            // Total distance to scroll through
+            const scrollableDistance = sectionHeight - viewportHeight;
 
-            // Total scrollable distance within the section
-            const properScrollDistance = sectionHeight - viewportHeight;
+            // Scrolled amount (starts at 0 when section top hits screen top)
+            // But we want it to start counting slightly differently?
+            // "Sticky" usually means: Top hits 0, then we stay there for X pixels.
+            const rawProgress = -rect.top / scrollableDistance;
 
-            // How far we've scrolled into the section (offset by when it hits top)
-            const scrolled = -start;
-
-            let progress = 0;
-            if (scrolled > 0 && properScrollDistance > 0) {
-                progress = scrolled / properScrollDistance;
-            }
-
-            // Clamp between 0 and 1
-            progress = Math.min(Math.max(progress, 0), 1);
+            // Clamp 0-1
+            const progress = Math.min(Math.max(rawProgress, 0), 1);
             setScrollProgress(progress);
+
+            // Calculate active step
+            // We have 5 steps.
+            // 0.0 - 0.2 -> Step 0
+            // 0.2 - 0.4 -> Step 1
+            // ...
+            const stepIndex = Math.floor(progress * t.steps.length);
+            // Ensure we don't exceed max index
+            const finalStep = Math.min(stepIndex, t.steps.length - 1);
+
+            setActiveStep(finalStep);
         };
 
         window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll();
+        handleScroll(); // Init
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [t.steps.length]);
+
+    // Manual click on sidebar to scroll to position (Optional, but hard to implement with native scroll. 
+    // We'll leave it as visual only or smooth scroll to approximate position if needed)
 
     return (
         <section ref={sectionRef} className={styles.section}>
             <div className={styles.stickyWrapper}>
                 <div className={styles.container}>
-                    <div className={styles.header}>
-                        <h2 className={styles.title}>{t.title}</h2>
-                        <p className={styles.subtitle}>{t.subtitle}</p>
+
+                    {/* LEFT COLUMN: Static Context */}
+                    <div className={styles.leftColumn}>
+                        <h2 className={styles.title}>
+                            {t.title ? t.title.split(' ').map((word, i) => (
+                                <span key={i} className={i % 2 !== 0 ? styles.highlight : ''}>
+                                    {word}{' '}
+                                </span>
+                            )) : "Cómo Funciona"}
+                        </h2>
+                        <p className={styles.subtitle || styles.cardDesc}>
+                            {t.subtitle}
+                        </p>
                     </div>
 
-                    <div className={styles.timelineMask}>
-                        <div
-                            className={styles.timelineTrack}
-                            style={{
-                                // Entrance Effect:
-                                // At progress 0, Center of Step 1 is at 80vw (off-center to right)
-                                // As progress goes to 0.2 (approx), it settles at 50vw.
-                                // Then it pans normally.
-                                // Simplified: Start at 70vw.
-                                transform: `translateX(calc(70vw - 200px - ${scrollProgress * (t.steps.length) * 400}px))`
-                            }}
-                            ref={scrollContainerRef}
-                        >
-                            <div className={styles.line}></div>
-                            <div
-                                className={styles.fillingLine}
-                                style={{
-                                    // Make line start from "off screen" relative to track (track offset -100vw in CSS)
-                                    // Width needs to cover that gap + progress
-                                    width: `calc(100vw + ${scrollProgress * (t.steps.length) * 400}px)`
-                                }}
-                            ></div>
+                    {/* RIGHT COLUMN: Dynamic Cards */}
+                    <div className={styles.rightColumn}>
 
-                            {t.steps.map((step, index) => {
-                                // Calculate how close this step is to the "virtual center"
-                                // Virtual center is exactly at index = scrollProgress * (total - 1)
-                                const activeIndex = scrollProgress * (t.steps.length - 1);
-                                const distanceFromCenter = Math.abs(activeIndex - index);
-                                const isFocused = distanceFromCenter < 0.5;
-
-                                return (
-                                    <div
-                                        key={index}
-                                        className={`${styles.stepItem} ${isFocused ? styles.activeStep : ''}`}
-                                        style={{
-                                            // Dynamic scale: 1.0 normally, up to 1.3 at center
-                                            transform: `scale(${1 + Math.max(0, 0.3 - distanceFromCenter * 0.3)})`,
-                                            opacity: Math.max(0.4, 1 - distanceFromCenter * 0.5)
-                                        }}
-                                    >
-                                        <div className={styles.markerContainer}>
-                                            <div className={styles.marker}>
-                                                <span className={styles.stepNumber}>{index + 1}</span>
-                                            </div>
-                                        </div>
-
-                                        <div className={styles.content}>
-                                            <div className={styles.card}>
-                                                <h3 className={styles.cardTitle}>{step.title}</h3>
-                                                <p className={styles.cardDesc}>{step.description}</p>
-                                            </div>
-                                        </div>
+                        <div className={styles.cardWrapper}>
+                            {t.steps.map((step, index) => (
+                                <div
+                                    key={index}
+                                    className={`${styles.card} ${activeStep === index ? styles.activeCard : ''}`}
+                                >
+                                    <div className={styles.stepLabel}>
+                                        {language === 'es' ? 'Paso' : 'Step'} {index + 1}
                                     </div>
-                                );
-                            })}
+                                    <h3 className={styles.cardTitle}>{step.title}</h3>
+                                    <p className={styles.cardDesc}>{step.description}</p>
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* TIMELINE SIDEBAR */}
+                        <div className={styles.timelineSidebar}>
+                            <div className={styles.timelineTrack}></div>
+                            {/* Animated Fill Line */}
+                            <div
+                                className={styles.fillTrack}
+                                style={{
+                                    height: `${(scrollProgress * 100)}%`
+                                }}
+                            />
+
+                            {t.steps.map((_, index) => (
+                                <div
+                                    key={index}
+                                    className={`${styles.timelineItem} ${activeStep === index ? styles.activeItem : ''}`}
+                                >
+                                    <div className={styles.timelineLabel}>
+                                        {language === 'es' ? 'Paso' : 'Step'} {index + 1}
+                                    </div>
+                                    <div className={`${styles.dot} ${activeStep === index ? styles.activeDot : ''}`} />
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
+            </div>
+
+            {/* MOBILE LIST FALLBACK (Visible only on mobile via CSS) */}
+            <div className={`${styles.container} ${styles.mobileList}`} style={{ display: 'none' }}>
+                {/* Logic handles display: none in media queries, 
+                     but we need to render the content for DOM */}
+                {/* CSS determines visibility: @media (max-width: 768px) -> .rightColumn {display:none}, .mobileList {display:flex} */}
+
+                {t.steps.map((step, index) => (
+                    <div key={index} className={styles.mobileCard}>
+                        <div style={{ color: '#ff5722', fontWeight: '800', marginBottom: '1rem' }}>
+                            {language === 'es' ? 'Paso' : 'Step'} {index + 1}
+                        </div>
+                        <h3 className={styles.cardTitle} style={{ fontSize: '2rem' }}>{step.title}</h3>
+                        <p className={styles.cardDesc}>{step.description}</p>
+                    </div>
+                ))}
             </div>
         </section>
     );

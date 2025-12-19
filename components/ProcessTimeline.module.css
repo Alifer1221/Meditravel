@@ -1,408 +1,299 @@
 .section {
     position: relative;
-    height: 400vh;
-    /* creates the scroll distance */
-    background: #f8fafc;
-    /* Light background to contrast with white cards */
+    height: 350vh;
+    /* Long scroll area to accommodate 5 steps comfortably */
+    background: #fdfbf7;
+    /* Creamy background similar to reference */
+    padding: 0;
 }
 
 .stickyWrapper {
     position: sticky;
     top: 0;
     height: 100vh;
-    overflow: hidden;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--spacing-4);
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    /* Left column slightly narrower */
+    gap: 4rem;
+    padding: 0 2rem;
     align-items: center;
+    position: relative;
 }
 
-.header {
-    text-align: center;
-    margin-bottom: var(--spacing-16);
+/* LEFT COLUMN: Static Branding */
+.leftColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-right: 2rem;
 }
 
 .title {
-    font-size: var(--text-4xl);
-    color: var(--primary-900);
-    margin-bottom: var(--spacing-4);
+    font-size: 4rem;
     font-weight: 800;
+    color: #1e293b;
+    /* Slate 800 */
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
 }
 
-.subtitle {
-    font-size: var(--text-xl);
-    color: var(--text-light);
+/* Highlight word styling if needed */
+.highlight {
+    color: #0d9488;
+    /* Teal */
 }
 
-.timelineMask {
-    width: 100vw;
-    overflow: hidden;
-    padding: 20px 0;
-}
-
-.timelineTrack {
+/* RIGHT COLUMN: The Dynamic Card */
+.rightColumn {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 0;
-    /* Remove gap, handle spacing via item width/padding for smoother calc */
-    padding-left: 0;
-    /* Handled by JS offset */
-    will-change: transform;
-    width: max-content;
-    /* Ensure track is as wide as items */
+    justify-content: center;
+    height: 100%;
 }
 
-/* The horizontal central line */
-.line {
-    position: absolute;
-    top: 50%;
-    left: -100vw;
-    /* Start way back to cover entrance */
-    right: 0;
-    height: 4px;
-    width: 400%;
-    /* Make it long enough */
-    background: #e2e8f0;
-    transform: translateY(-50%);
-    z-index: 0;
-}
-
-.fillingLine {
-    position: absolute;
-    top: 50%;
-    left: -100vw;
-    /* Match starting point of background line */
-    height: 4px;
-    /* Same thickness as base line */
-    background: linear-gradient(90deg, #ff5722, #ffaa00);
-    /* Horizontal gradient */
-    transform: translateY(-50%);
-    z-index: 1;
-    /* Above background line but below items */
-    box-shadow: 0 0 10px rgba(255, 87, 34, 0.4);
-    /* Soft glow */
-    transition: width 0.1s linear;
-    /* Smooth fill */
-}
-
-.stepItem {
+.cardWrapper {
     position: relative;
-    width: 400px;
-    /* Fixed width for calculation reliability */
-    min-width: 400px;
-    padding: 20px 40px;
-    /* Add vertical padding to prevent clipping of scaled markers */
+    width: 100%;
+    max-width: 550px;
+    aspect-ratio: 1/1;
+    /* Square-ish card like reference */
+    max-height: 600px;
+    perspective: 1000px;
+}
+
+.card {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    border-radius: 2.5rem;
+    padding: 4rem 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+    pointer-events: none;
     z-index: 1;
-    /* Removed global opacity to keep card background opaque */
-    transition: all 0.2s ease-out;
 }
 
-/* Inactive State Styling targeting children */
-.stepItem:not(.activeStep) .card,
-.stepItem:not(.activeStep) .marker {
-    opacity: 0.5;
-    /* Fade the content visually */
-    filter: grayscale(1);
-    /* Optional: desaturate inactive */
-}
-
-/* Ensure background stays opaque to hide line */
-.card {
-    background: white;
-    /* Solid white */
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: relative;
-    text-align: center;
-    z-index: 5;
-    /* Ensure above line */
-}
-
-.stepItem.activeStep {
+.card.activeCard {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
     z-index: 10;
 }
 
-.stepItem.activeStep .marker {
-    background: white;
-    color: #ff5722;
-    /* Orange number */
-    border-color: #ff5722;
-    box-shadow: 0 0 0 4px rgba(255, 87, 34, 0.15);
-}
-
-.stepItem.activeStep .stepNumber {
-    color: #ff5722;
-}
-
-/* Containers */
-/* Containers */
-.content {
-    width: 100%;
-    padding: var(--spacing-4);
-    margin-top: 20px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.card {
-    background: white;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    position: relative;
-    text-align: center;
-}
-
-/* Connect card to line */
-.card::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid white;
-}
-
-/* Connect card to line */
-.content::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid white;
-}
-
-.markerContainer {
-    /* Masks line behind */
-    padding: 15px;
-    /* Increased padding to avoid clipping */
-    border-radius: 50%;
-    overflow: visible;
-    /* Prevent cutting off */
-}
-
-.marker {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: white;
-    border: 2px solid #e2e8f0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    font-weight: 700;
-    color: #64748b;
-    transition: all 0.3s ease;
-    z-index: 2;
-    position: relative;
-    /* For z-index context */
-}
-
-.stepNumber {
-    font-size: 1.5rem;
+/* Card Content Styles */
+.stepLabel {
+    font-size: 0.875rem;
     font-weight: 800;
-    color: inherit;
-    line-height: 1;
-    /* Fix vertical alignment/clipping */
-    padding-top: 2px;
-    /* Visual center adjustment */
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #fca5a5;
+    /* Light Red/Orange placeholder */
+    margin-bottom: 1.5rem;
+    color: #ff5722;
+    /* Brand Orange */
 }
 
-/* The Card */
 .cardTitle {
-    font-size: var(--text-xl);
-    color: var(--primary-800);
-    margin-bottom: var(--spacing-2);
-    font-weight: 700;
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0f172a;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-outfit), sans-serif;
 }
 
 .cardDesc {
-    color: var(--text-light);
-    line-height: 1.5;
-    font-size: var(--text-sm);
+    font-size: 1.25rem;
+    color: #475569;
+    /* Slate 600 */
+    line-height: 1.6;
 }
 
-/* Marker Styles */
-
-/* Center Marker (Red Circle with Arrow) */
-.markerContainer {
+/* TIMELINE SIDEBAR (Right Edge) */
+.timelineSidebar {
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 2rem;
+    /* Stick to right edge of container */
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    height: 60%;
+    /* Occupy middle height */
+    justify-content: space-between;
+    z-index: 20;
+}
+
+.timelineTrack {
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    right: 9px;
+    /* Center with dots */
+    width: 2px;
+    background: #e2e8f0;
+    z-index: 0;
+}
+
+.fillTrack {
+    position: absolute;
+    top: 0;
+    right: 9px;
+    width: 2px;
+    background: #ff5722;
+    /* Orange fill */
+    z-index: 1;
+    transition: height 0.3s ease-out;
+}
+
+.timelineItem {
+    position: relative;
+    display: flex;
     align-items: center;
-    background: transparent;
-    padding: 10px 0;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    cursor: pointer;
     z-index: 2;
 }
 
-.marker {
-    width: 40px;
-    height: 40px;
-    background: white;
-    border: 2px solid #cbd5e1;
+.dot {
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #cbd5e1;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 0 4px white;
+    background: #ffffff;
+    border: 3px solid #cbd5e1;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 0 4px #fdfbf7;
+    /* Mask track */
 }
 
-.activeMarker {
-    background: linear-gradient(135deg, #ff4d4d, #f9cb28);
-    border-color: transparent;
+.dot.activeDot {
+    background: #ff5722;
+    border-color: #ff5722;
+    transform: scale(1.3);
+}
+
+.timelineLabel {
+    background: #ff5722;
     color: white;
-    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    box-shadow: 0 0 0 4px white, 0 0 25px rgba(255, 77, 77, 0.6);
-}
-
-.arrowIcon {
-    font-size: 1.2rem;
-    position: relative;
-    z-index: 10;
-}
-
-@keyframes popIn {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.35);
-    }
-
-    100% {
-        transform: scale(1.15);
-    }
-}
-
-/* Mobile Responsiveness */
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .timeline {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0;
-        padding-left: 20px;
-        /* Space for line */
-    }
-
-    .line {
-        width: 2px;
-        height: 100%;
-        top: 0;
-        left: 20px;
-        /* Aligned with padding */
-        right: auto;
-    }
-
-    .progressLine {
-        width: 2px;
-        height: 100%;
-        /* Fill on mobile or animate height if possible, but simplest is full */
-        top: 0;
-        left: 20px;
-        transition: height 1s ease;
-    }
-
-    .stepItem {
-        width: 100%;
-        flex-direction: row;
-        /* Marker left, content right */
-        align-items: flex-start;
-        text-align: left;
-        margin-bottom: 30px;
-        transform: none;
-        /* Reset transform for simpler mobile render */
-        opacity: 1;
-    }
-
-    .markerContainer {
-        width: 40px;
-        height: 40px;
-        margin-right: 15px;
-        margin-bottom: 0;
-        /* Reset margins */
-        flex-shrink: 0;
-        /* Don't squash marker */
-        transform: translateX(-50%);
-        /* Center on line */
-        background: #f8fafc;
-        /* Match bg to hide line behind marker */
-    }
-
-    .content {
-        margin-top: 0;
-        padding: 0;
-    }
-
-    .card {
-        width: 100%;
-    }
-
-    .card::after {
-        display: none;
-    }
-}
-
-/* Call to Action */
-.ctaContainer {
-    margin-top: var(--spacing-16);
-    text-align: center;
-    animation: fadeIn 1s ease-out forwards;
-    opacity: 0;
-    animation-delay: 0.5s;
-}
-
-.ctaButton {
-    display: inline-block;
-    background: var(--gradient-primary);
-    color: white;
-    font-size: var(--text-lg);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
     font-weight: 700;
-    padding: var(--spacing-4) var(--spacing-12);
-    border-radius: var(--radius-full);
-    text-decoration: none;
-    box-shadow: 0 10px 25px -5px rgba(14, 165, 233, 0.5);
-    transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
+    font-size: 0.875rem;
+    box-shadow: 0 4px 6px -1px rgba(255, 87, 34, 0.3);
+
+    /* Animation In/Out */
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: absolute;
+    right: 35px;
+    /* Offset from dot */
+    white-space: nowrap;
 }
 
-.ctaButton:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 35px -5px rgba(14, 165, 233, 0.6);
-    filter: brightness(1.1);
+.timelineItem.activeItem .timelineLabel {
+    opacity: 1;
+    transform: translateX(0);
 }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding-top: 4rem;
+        align-items: flex-start;
+    }
+
+    .leftColumn {
+        text-align: center;
+        padding-right: 0;
+    }
+
+    .title {
+        font-size: 3rem;
+    }
+
+    .rightColumn {
+        height: auto;
+    }
+
+    .cardWrapper {
+        aspect-ratio: auto;
+        min-height: 400px;
+        max-width: 100%;
+    }
+
+    .timelineSidebar {
+        display: none;
+        /* Hide complex timeline on tablet/mobile, use swipe or stack? 
+                        For now, sticky might break on small screens. */
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Reset to vertical stack for mobile is safer, 
+       but if we stick to sticky, we need to ensure content fits viewport */
+    .section {
+        height: auto;
+    }
+
+    .stickyWrapper {
+        position: relative;
+        height: auto;
+        padding: 4rem 1rem;
+        display: block;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .leftColumn {
+        margin-bottom: 2rem;
+    }
+
+    .rightColumn {
+        display: none;
+        /* Hide the sticky card mechanism */
+    }
+
+    /* Fallback Mobile List */
+    .mobileList {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .mobileCard {
+        background: white;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
     }
 }
