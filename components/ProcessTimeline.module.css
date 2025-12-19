@@ -95,7 +95,8 @@
 
 .card {
     position: relative;
-    background: #fbf8f3;
+    background: #F5F0EB;
+    /* Luxury Beige / Crema */
     border-radius: 2rem;
     padding: 3.5rem 3rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
