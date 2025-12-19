@@ -62,17 +62,54 @@ export default function ProcessTimeline() {
                 <div className={styles.container}>
 
                     {/* LEFT COLUMN: Static Context */}
+                    {/* LEFT COLUMN: Static Context */}
                     <div className={styles.leftColumn}>
                         <h2 className={styles.title}>
-                            {t.title ? t.title.split(' ').map((word, i) => (
-                                <span key={i} className={i % 2 !== 0 ? styles.highlight : ''}>
-                                    {word}{' '}
-                                </span>
-                            )) : "Cómo Funciona"}
+                            {language === 'es' ? 'Tu Salud, Nuestra Prioridad' : 'Your Health, Our Priority'}
                         </h2>
-                        <p className={styles.subtitle || styles.cardDesc}>
-                            {t.subtitle}
-                        </p>
+
+                        {/* Feature List (GetJoy Style) */}
+                        <div className={styles.featureList}>
+                            <div className={styles.featureItem}>
+                                <div className={styles.checkIcon}>✓</div>
+                                <span>
+                                    {language === 'es'
+                                        ? 'Clínicas acreditadas internacionalmente con tecnología de punta.'
+                                        : 'Internationally accredited clinics with state-of-the-art technology.'}
+                                </span>
+                            </div>
+                            <div className={styles.featureItem}>
+                                <div className={styles.checkIcon}>✓</div>
+                                <span>
+                                    {language === 'es'
+                                        ? 'Ahorra hasta un 70% en procedimientos sin sacrificar calidad.'
+                                        : 'Save up to 70% on procedures without sacrificing quality.'}
+                                </span>
+                            </div>
+                            <div className={styles.featureItem}>
+                                <div className={styles.checkIcon}>✓</div>
+                                <span>
+                                    {language === 'es'
+                                        ? 'Paquetes todo incluido: Viaje, alojamiento y recuperación.'
+                                        : 'All-inclusive packages: Travel, accommodation, and recovery.'}
+                                </span>
+                            </div>
+                        </div>
+
+                        <a href="/agenda" className={styles.ctaButton} style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            background: '#fdfbf7',
+                            color: '#1a4d2e', /* Match Card Text */
+                            padding: '1rem 2rem',
+                            borderRadius: '50px',
+                            fontWeight: '800',
+                            textDecoration: 'none',
+                            width: 'fit-content',
+                            boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                        }}>
+                            {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')} {' >'}
+                        </a>
                     </div>
 
                     {/* RIGHT COLUMN: Dynamic Cards */}
@@ -121,7 +158,7 @@ export default function ProcessTimeline() {
             </div>
 
             {/* MOBILE LIST FALLBACK (Visible only on mobile via CSS) */}
-            <div className={`${styles.container} ${styles.mobileList}`} style={{ display: 'none' }}>
+            <div className={`${styles.container} ${styles.mobileList}`}>
                 {/* Logic handles display: none in media queries, 
                      but we need to render the content for DOM */}
                 {/* CSS determines visibility: @media (max-width: 768px) -> .rightColumn {display:none}, .mobileList {display:flex} */}
