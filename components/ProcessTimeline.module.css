@@ -6,9 +6,7 @@
     background: #366193;
     /* Accurate Reference Blue */
     padding: 4rem 0;
-    /* Add vertical breathing room */
     overflow: visible;
-    /* Needed for sticky to work */
     font-family: 'Inter', sans-serif;
 }
 
@@ -18,79 +16,18 @@
     margin: 0 auto;
     padding: 0 2rem;
     display: grid;
-    /* Left (Content) | Center (Cards) | Right (Timeline) */
-    grid-template-columns: 0.8fr 1fr 50px;
-    gap: 2rem;
-    /* align-items: stretch; (Default) - Required for sticky tracks to be full height */
+    /* Left (Content) | Center-Right (Cards) */
+    grid-template-columns: 0.8fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
     position: relative;
-    justify-items: stretch;
-}
-
-/* ... existing styles ... */
-
-.timelineStickySidebar {
-    position: sticky;
-    top: 50vh;
-    /* Center vertically in viewport */
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    z-index: 50;
-    pointer-events: none;
-    height: auto;
-    align-self: start;
-    /* Start sticking from top */
-    justify-self: end;
-    /* Align to right edge */
-    margin-right: 5px;
-    /* Tiny buffer */
-}
-
-.timelineItem {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    /* Align dots to right */
-    gap: 1.5rem;
-    height: 60px;
-}
-
-/* Ensure track is contained */
-.timelineTrack {
-    position: absolute;
-    top: 20px;
-    /* Start inside first dot */
-    bottom: 20px;
-    /* End inside last dot */
-    right: 9px;
-    /* Center with dots (20px width / 2 - 1px border) */
-    width: 2px;
-    background: rgba(255, 255, 255, 0.3);
-    z-index: -1;
-}
-
-/* Mobile */
-@media (max-width: 1024px) {
-    .container {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    /* ... existing mobile ... */
-
-    .timelineOverlay {
-        display: none;
-    }
 }
 
 /* LEFT COLUMN: Sticky Branding */
 .leftColumn {
     position: sticky;
     top: 50px;
-    /* Stick near top */
     height: calc(100vh - 100px);
-    /* Fit viewport */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -147,7 +84,6 @@
     gap: 40vh;
     /* Large gap matches GetJoy spacing */
     padding-bottom: 10vh;
-    /* Space at end */
     padding-top: 10vh;
 }
 
@@ -155,12 +91,10 @@
     position: relative;
     width: 100%;
     perspective: 1000px;
-    /* Cards are now items in the stream, not stacked absolutely */
 }
 
 .card {
     position: relative;
-    /* Normal flow */
     background: #fbf8f3;
     border-radius: 2rem;
     padding: 3.5rem 3rem;
@@ -171,8 +105,6 @@
     border: none;
     z-index: 5;
     color: #1a4d2e;
-
-    /* Reveal Animation on Scroll handled by JS/Observer ideally, or CSS scroll-driven */
     transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
@@ -266,14 +198,7 @@
     margin-bottom: 0.2rem;
 }
 
-/* TIMELINE SIDEBAR (Now needs to be attached to Sticky Left or fixed in viewport) */
-/* Option: Put it inside .leftColumn or fixed. Reference has it Fixed? Or Sticky right side? */
-/* We'll put it inside .leftColumn but absolute positioned to the right of it? */
-/* Or in the grid as a 3rd narrow column? sticky as well. */
-/* Simplest: Absolute inside .leftColumn, aligned right */
-
-/* TIMELINE SIDEBAR: FIXED + VISIBILITY CHECK */
-/* Using fixed positioning for perfect viewport centering, controlled by opacity */
+/* TIMELINE SIDEBAR: FIXED positioning with Visibility Logic */
 .timelineFixedSidebar {
     position: fixed;
     top: 50%;
@@ -282,9 +207,8 @@
     display: flex;
     flex-direction: column;
     z-index: 999;
-    /* Top level */
     pointer-events: none;
-    /* Initially disabled */
+    /* Default hidden/unclickable */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -292,7 +216,6 @@
 .timelineFixedSidebar[data-visible="true"] {
     opacity: 1;
     pointer-events: auto;
-    /* Enable clicks when visible */
 }
 
 .timelineItem {
@@ -300,7 +223,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    /* Align dots to right */
     gap: 1.5rem;
     height: 60px;
 }
@@ -342,7 +264,6 @@
     transform: translateX(0);
 }
 
-/* TRACK LINE */
 .timelineTrack {
     position: absolute;
     top: 0;
@@ -380,7 +301,7 @@
         margin-bottom: 2rem;
     }
 
-    .timelineStickySidebar {
-        display: none;
+    .timelineFixedSidebar {
+        display: none !important;
     }
 }
