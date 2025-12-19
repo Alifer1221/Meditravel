@@ -87,8 +87,35 @@
         min-width: 280px;
     }
 
-    .navButton {
-        display: none;
-        /* Hide buttons on mobile, use swipe */
-    }
+    /* Hide buttons on mobile, use swipe */
+}
+
+/* Pagination Dots */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #a0aec0;
+    /* Neutral gray */
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    background: #718096;
+}
+
+.activeDot {
+    background: #68d391;
+    /* Green color from image */
+    transform: scale(1.2);
 }

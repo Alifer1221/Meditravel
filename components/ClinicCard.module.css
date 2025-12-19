@@ -2,23 +2,20 @@
 .card {
     position: relative;
     display: block;
-    /* Link is a block */
     width: 100%;
     height: 400px;
-    /* Fixed height for consistency */
     border-radius: var(--radius-2xl);
     overflow: hidden;
     text-decoration: none;
     box-shadow: var(--shadow-xl);
-    transition: all 0.5s ease;
     cursor: pointer;
-    background: black;
-    /* Fallback */
+    background: #000;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-2xl);
+.imageWrapper {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 /* Background Image */
@@ -26,142 +23,53 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.8s ease, filter 0.5s ease;
-}
-
-/* Default State: Clean Image */
-.card .image {
+    transition: transform 0.6s ease;
     filter: brightness(0.9);
 }
 
-/* Hover State: Blur & Darken */
+/* Hover: Zoom Image */
 .card:hover .image {
-    filter: blur(8px) brightness(0.4);
     transform: scale(1.1);
 }
 
-/* Content Container */
+/* Content Container - Gradient Overlay */
 .content {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: var(--spacing-8);
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
-    color: white;
-    z-index: 2;
-    transition: all 0.5s ease;
+    height: 60%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 60%, transparent 100%);
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 100%;
+    align-items: flex-start;
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* Title always visible but moves up on hover */
+/* Typography */
 .title {
-    font-size: var(--text-2xl);
-    font-weight: 800;
+    font-family: var(--font-display);
+    font-size: 1.8rem;
+    font-weight: 700;
     color: white;
-    margin-bottom: var(--spacing-2);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    transform: translateY(120px);
-    /* Push down initially */
-    transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.card:hover .title {
-    transform: translateY(0);
-}
-
-/* Hidden elements reveal on hover */
-.hiddenContent {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s ease 0.1s;
-    /* Slight delay */
-    height: 0;
-    /* Don't take space initially */
-    overflow: hidden;
-}
-
-.card:hover .hiddenContent {
-    opacity: 1;
-    transform: translateY(0);
-    height: auto;
-    margin-top: var(--spacing-4);
-}
-
-/* Details */
 .location {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    font-size: var(--text-sm);
+    font-size: 1.1rem;
     color: rgba(255, 255, 255, 0.9);
-    margin-bottom: var(--spacing-4);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
 }
 
-.description {
-    font-size: var(--text-base);
-    line-height: 1.5;
-    color: rgba(255, 255, 255, 0.8);
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    margin-bottom: var(--spacing-6);
-}
-
-/* Badges */
-.specialties {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--spacing-2);
-    margin-bottom: var(--spacing-6);
-}
-
-.badge {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: var(--spacing-1) var(--spacing-3);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    color: white;
-}
-
-/* Actions */
-.footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    padding-top: var(--spacing-4);
-}
-
-.rating {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    color: #fbbf24;
-    /* Amber 400 */
-    font-weight: 600;
-}
-
-.reviews {
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: normal;
-    font-size: var(--text-sm);
-}
-
-.arrow {
-    font-size: var(--text-xl);
-    color: white;
-    transform: translateX(0);
-    transition: transform 0.3s ease;
-}
-
-.card:hover .arrow {
-    transform: translateX(5px);
+.accreditation {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    letter-spacing: 0.02em;
 }

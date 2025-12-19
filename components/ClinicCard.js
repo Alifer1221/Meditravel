@@ -17,42 +17,20 @@ export default function ClinicCard({ clinic, specialties = [] }) {
 
     return (
         <Link href={`/clinicas/${clinic.id}`} className={styles.card}>
-            {/* Background Image */}
-            <img
-                src={clinic.image}
-                alt={clinic.name}
-                className={styles.image}
-            />
+            <div className={styles.imageWrapper}>
+                <img
+                    src={clinic.image}
+                    alt={clinic.name}
+                    className={styles.image}
+                />
+            </div>
 
-            {/* Content Overlay */}
             <div className={styles.content}>
                 <h3 className={styles.title}>{clinic.name}</h3>
-
-                {/* Content revealed on hover */}
-                <div className={styles.hiddenContent}>
-                    <div className={styles.location}>
-                        <span>📍</span> {clinic.location}
-                    </div>
-
-                    <p className={styles.description}>{clinic.description}</p>
-
-                    {clinicSpecialties.length > 0 && (
-                        <div className={styles.specialties}>
-                            {clinicSpecialties.map((spec, index) => (
-                                <span key={index} className={styles.badge}>{spec}</span>
-                            ))}
-                        </div>
-                    )}
-
-                    <div className={styles.footer}>
-                        <div className={styles.rating}>
-                            <span>★</span>
-                            <span>{clinic.rating}</span>
-                            <span className={styles.reviews}>({clinic.reviews})</span>
-                        </div>
-                        <span className={styles.arrow}>→</span>
-                    </div>
-                </div>
+                <p className={styles.location}>{clinic.location}</p>
+                {clinic.accreditation && (
+                    <p className={styles.accreditation}>{clinic.accreditation}</p>
+                )}
             </div>
         </Link>
     );
