@@ -17,20 +17,34 @@ export default function ClinicCard({ clinic, specialties = [] }) {
 
     return (
         <Link href={`/clinicas/${clinic.id}`} className={styles.card}>
-            <div className={styles.imageWrapper}>
-                <img
-                    src={clinic.image}
-                    alt={clinic.name}
-                    className={styles.image}
-                />
-            </div>
+            {/* Skewed Container */}
+            <div className={styles.skewWrapper}>
 
-            <div className={styles.content}>
-                <h3 className={styles.title}>{clinic.name}</h3>
-                <p className={styles.location}>{clinic.location}</p>
-                {clinic.accreditation && (
-                    <p className={styles.accreditation}>{clinic.accreditation}</p>
-                )}
+                {/* Image Section */}
+                <div className={styles.imageSection}>
+                    <div className={styles.unskewImage}>
+                        <img
+                            src={clinic.image}
+                            alt={clinic.name}
+                            className={styles.image}
+                        />
+                    </div>
+                    {/* Badge Pill */}
+                    <div className={styles.badge}>
+                        <span className={styles.badgeText}>{clinic.accreditation ? 'CERTIFIED' : 'CLINIC'}</span>
+                    </div>
+                </div>
+
+                {/* Content Section */}
+                <div className={styles.contentSection}>
+                    <div className={styles.unskewContent}>
+                        <h3 className={styles.title}>{clinic.name}</h3>
+                        <p className={styles.description}>
+                            {clinic.description}
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </Link>
     );

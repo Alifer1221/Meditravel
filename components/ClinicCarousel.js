@@ -40,6 +40,15 @@ export default function ClinicCarousel({ clinics }) {
 
     return (
         <div className={styles.carouselContainer}>
+            {/* Left Arrow */}
+            <button
+                onClick={() => scroll('left')}
+                className={`${styles.navButton} ${styles.prevButton}`}
+                aria-label="Previous"
+            >
+                ←
+            </button>
+
             <div
                 className={styles.carouselTrack}
                 ref={trackRef}
@@ -51,6 +60,15 @@ export default function ClinicCarousel({ clinics }) {
                     </div>
                 ))}
             </div>
+
+            {/* Right Arrow */}
+            <button
+                onClick={() => scroll('right')}
+                className={`${styles.navButton} ${styles.nextButton}`}
+                aria-label="Next"
+            >
+                →
+            </button>
 
             {/* Pagination Dots */}
             <div className={styles.pagination}>
