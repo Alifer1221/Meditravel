@@ -6,12 +6,9 @@
     text-decoration: none;
     transition: transform 0.3s ease;
 
-    /* Apply the shape defined by the variant */
-    clip-path: var(--clip-polygon);
-
     /* Simulate Border using Drop Shadow */
-    /* First shadow = 1px solid(ish) border color. Second shadow = depth. */
-    filter: drop-shadow(0 0 1px #94a3b8) drop-shadow(0 8px 20px rgba(0, 0, 0, 0.12));
+    /* Darker, harder shadow for border effect */
+    filter: drop-shadow(0 0 1px #64748b) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
 }
 
 /* Shape Variants using Clip-Path */
@@ -36,6 +33,8 @@
     background: white;
     display: flex;
     flex-direction: column;
+    /* Apply shape here so parent filter sees it */
+    clip-path: var(--clip-polygon);
 }
 
 .card:hover {
