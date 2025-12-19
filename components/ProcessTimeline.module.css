@@ -1,7 +1,7 @@
 .section {
     position: relative;
-    background: #366193;
-    /* Accurate Reference Blue */
+    background: #F5F0EB;
+    /* Luxury Beige / Crema */
     padding: 4rem 0;
     overflow: visible;
     font-family: var(--font-primary);
@@ -29,14 +29,14 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: white;
+    color: var(--neutral-800);
     z-index: 10;
 }
 
 .title {
     font-size: 3.5rem;
     font-weight: 800;
-    color: white;
+    color: var(--neutral-900);
     line-height: 1.1;
     margin-bottom: 2rem;
     letter-spacing: -0.02em;
@@ -57,7 +57,7 @@
     gap: 1rem;
     font-size: 1.1rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.95);
+    color: var(--neutral-600);
     font-weight: 500;
     font-family: var(--font-primary);
 }
@@ -95,8 +95,7 @@
 
 .card {
     position: relative;
-    background: #F5F0EB;
-    /* Luxury Beige / Crema */
+    background: white;
     border-radius: 2rem;
     padding: 3.5rem 3rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
