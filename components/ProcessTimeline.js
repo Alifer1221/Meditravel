@@ -44,7 +44,7 @@ export default function ProcessTimeline() {
                 {/* LEFT COLUMN: Sticky Branding */}
                 <div className={styles.leftColumn}>
                     <h2 className={styles.title}>
-                        {language === 'es' ? 'Tu Salud, Nuestra Prioridad' : 'Your Health, Our Priority'}
+                        {language === 'es' ? <>Tu Salud,<br />Nuestra Prioridad</> : <>Your Health,<br />Our Priority</>}
                     </h2>
 
                     <div className={styles.featureList}>
