@@ -229,3 +229,7 @@
     justify-content: center;
   }
 }
+
+.bgLight {
+  background: var(--primary-50);
+}
