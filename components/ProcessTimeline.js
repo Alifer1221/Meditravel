@@ -75,7 +75,7 @@ export default function ProcessTimeline() {
                     </div>
 
                     <a href="/agenda" className={styles.ctaButton}>
-                        {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')} {' >'}
+                        {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')}
                     </a>
                 </div>
 
