@@ -272,36 +272,27 @@
 /* Or in the grid as a 3rd narrow column? sticky as well. */
 /* Simplest: Absolute inside .leftColumn, aligned right */
 
-.timelineSidebar {
-    position: absolute;
-    right: -3rem;
-    /* Push slightly outside left col towards center? or right edge of screen? */
-    /* Reference: It's on the FAR RIGHT of the screen usually. */
-    /* To stick to right screen edge, use fixed positioning when section is visible, or sticky in a 3rd grid col */
-}
-
-/* Let's try fixing it to the viewport RIGHT edge if we want exact GetJoy */
-/* But strictly, GetJoy has it roughly aligned. */
-/* We will keep it absolute in the Sticky Left Column for now, or move it to a 3rd sticky column. */
-/* Better: Fixed position on screen (handled by JS toggling visibility) OR Sticky in a container. */
-/* Let's make the grid 3 cols: [Left-Sticky] [Right-Scroll] [Timeline-Sticky] */
-
-/* Updated Grid for 3 Cols */
-/* But 'container' restricts width... */
-/* Let's keep Sidebar as fixed-in-viewport component or part of sticky left col but pushed far right? */
-/* Actually, simply putting it in the Left sticky column and positioning it `right: -50px` might overlap scrolling content. */
-/* Let's place it Fixed to the right of the window for 'True' overlay feel, controlled by opacity. */
-
-.timelineOverlay {
+/* TIMELINE SIDEBAR: FIXED + VISIBILITY CHECK */
+/* Using fixed positioning for perfect viewport centering, controlled by opacity */
+.timelineFixedSidebar {
     position: fixed;
     top: 50%;
-    right: 3rem;
+    right: 2rem;
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
-    z-index: 50;
+    z-index: 999;
+    /* Top level */
     pointer-events: none;
-    /* Let clicks pass */
+    /* Initially disabled */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.timelineFixedSidebar[data-visible="true"] {
+    opacity: 1;
+    pointer-events: auto;
+    /* Enable clicks when visible */
 }
 
 .timelineItem {
@@ -309,10 +300,9 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    /* Align dots to right */
     gap: 1.5rem;
-    /* Space between label and dot */
     height: 60px;
-    /* Consistent spacing corresponding to scroll feel? */
 }
 
 .dot {
