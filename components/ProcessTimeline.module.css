@@ -126,6 +126,34 @@
     z-index: 5;
     color: #1a4d2e;
     transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: hidden;
+    /* Ensure icon doesn't spill if placed outside */
+}
+
+.cardIconBadge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fa5d94 0%, #ff80a6 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(250, 93, 148, 0.3);
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+}
+
+.cardIconBadge svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.cardWrapper:hover .cardIconBadge {
+    transform: rotate(0deg) scale(1.1);
 }
 
 /* Decorative Stacked Photos Effect */
