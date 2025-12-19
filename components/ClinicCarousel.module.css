@@ -63,7 +63,8 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    z-index: 100;
+    z-index: 1000;
+    /* Max Z-Index to beat everything */
     /* Removed font-size/padding since we use SVG now */
 
     /* Style: Glassy Dark */
