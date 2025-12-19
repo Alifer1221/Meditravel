@@ -31,17 +31,19 @@
 .timelineStickySidebar {
     position: sticky;
     top: 50vh;
+    /* Center vertically in viewport */
     transform: translateY(-50%);
     display: flex;
     flex-direction: column;
     z-index: 50;
     pointer-events: none;
     height: auto;
-    /* Ensure it doesn't take up full height preventing sticky */
-    align-self: flex-start;
-    /* Stick to top (which is centered via top:50vh) */
-    margin-top: 50px;
-    /* Optional adjustment */
+    align-self: start;
+    /* Start sticking from top */
+    justify-self: end;
+    /* Align to right edge */
+    margin-right: 5px;
+    /* Tiny buffer */
 }
 
 .timelineItem {
