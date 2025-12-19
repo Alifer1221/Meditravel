@@ -212,9 +212,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    /* Transparent White */
     backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.6);
     color: white;
     width: 64px;
     height: 64px;
@@ -227,7 +228,7 @@
     z-index: 9999 !important;
     /* Force on top */
     outline: none;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 
     /* Visibility: Hidden by default */
     opacity: 0;
@@ -248,7 +249,7 @@
 }
 
 .navButton:hover {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.25);
     transform: translateY(-50%) scale(1.1);
     border-color: white;
 }
