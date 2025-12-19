@@ -74,76 +74,77 @@ export default function ProcessTimeline() {
                         </div>
                     </div>
 
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    background: '#fdfbf7',
-                    color: '#00b4cc',
-                    padding: '1rem 2rem',
-                    borderRadius: '50px',
-                    fontWeight: '800',
-                    textDecoration: 'none',
-                    width: 'fit-content',
-                    boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
+                    <a href="/agenda" className={styles.ctaButton} style={{
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        background: '#fdfbf7',
+                        color: '#00b4cc',
+                        padding: '1rem 2rem',
+                        borderRadius: '50px',
+                        fontWeight: '800',
+                        textDecoration: 'none',
+                        width: 'fit-content',
+                        boxShadow: '0 10px 20px rgba(0,0,0,0.2)'
                     }}>
-                    {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')} {' >'}
-                </a>
-            </div>
+                        {t.ctaButton || (language === 'es' ? 'AGENDAR CITA' : 'BOOK APPOINTMENT')} {' >'}
+                    </a>
+                </div>
 
-            {/* RIGHT COLUMN: Scrolling Cards */}
-            <div className={styles.rightColumn}>
-                {t.steps.map((step, index) => (
-                    <div
-                        key={index}
-                        ref={el => cardsRef.current[index] = el}
-                        data-index={index}
-                        className={styles.cardWrapper}
-                        data-active={activeStep === index}
-                    >
-                        <div className={styles.cardImageBase} />
-                        <div className={styles.card}>
-                            <div className={styles.stepLabel}>
-                                {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}*
-                            </div>
-                            <h3 className={styles.cardTitle}>{step.title}</h3>
-
-                            <div className={styles.cardList}>
-                                <div className={styles.cardListItem}>
-                                    <div className={styles.cardListNum}>01</div>
-                                    <div className={styles.cardListText}>
-                                        <strong>{language === 'es' ? 'Descripción' : 'Overview'}</strong>
-                                        {step.description}
-                                    </div>
+                {/* RIGHT COLUMN: Scrolling Cards */}
+                <div className={styles.rightColumn}>
+                    {t.steps.map((step, index) => (
+                        <div
+                            key={index}
+                            ref={el => cardsRef.current[index] = el}
+                            data-index={index}
+                            className={styles.cardWrapper}
+                            data-active={activeStep === index}
+                        >
+                            <div className={styles.cardImageBase} />
+                            <div className={styles.card}>
+                                <div className={styles.stepLabel}>
+                                    {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}*
                                 </div>
-                                <div className={styles.cardListItem}>
-                                    <div className={styles.cardListNum}>02</div>
-                                    <div className={styles.cardListText}>
-                                        <strong>{language === 'es' ? 'Detalle' : 'Details'}</strong>
-                                        {language === 'es' ? 'Coordinación completa.' : 'Full coordination.'}
+                                <h3 className={styles.cardTitle}>{step.title}</h3>
+
+                                <div className={styles.cardList}>
+                                    <div className={styles.cardListItem}>
+                                        <div className={styles.cardListNum}>01</div>
+                                        <div className={styles.cardListText}>
+                                            <strong>{language === 'es' ? 'Descripción' : 'Overview'}</strong>
+                                            {step.description}
+                                        </div>
+                                    </div>
+                                    <div className={styles.cardListItem}>
+                                        <div className={styles.cardListNum}>02</div>
+                                        <div className={styles.cardListText}>
+                                            <strong>{language === 'es' ? 'Detalle' : 'Details'}</strong>
+                                            {language === 'es' ? 'Coordinación completa.' : 'Full coordination.'}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-            {/* GRID CHANNEL 3: Sticky Timeline */}
-            <div className={styles.timelineStickySidebar}>
-                <div className={styles.timelineTrack} />
-                {t.steps.map((_, index) => (
-                    <div
-                        key={index}
-                        className={`${styles.timelineItem} ${activeStep === index ? styles.activeItem : ''}`}
-                    >
-                        <div className={styles.timelineLabel}>
-                            {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}
+                {/* GRID CHANNEL 3: Sticky Timeline */}
+                <div className={styles.timelineStickySidebar}>
+                    <div className={styles.timelineTrack} />
+                    {t.steps.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`${styles.timelineItem} ${activeStep === index ? styles.activeItem : ''}`}
+                        >
+                            <div className={styles.timelineLabel}>
+                                {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}
+                            </div>
+                            <div className={`${styles.dot} ${activeStep === index ? styles.activeDot : ''}`} />
                         </div>
-                        <div className={`${styles.dot} ${activeStep === index ? styles.activeDot : ''}`} />
-                    </div>
-                ))}
-            </div>
+                    ))}
+                </div>
 
-        </div>
+            </div>
         </section >
     );
 }
