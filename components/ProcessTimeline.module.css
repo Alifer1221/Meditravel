@@ -204,19 +204,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* Center content in the sticky container if it has height? */
-    /* Sticky logic: */
+
+    /* Sticky logic with boundaries */
     position: sticky;
-    top: 50vh;
-    /* Center in Viewport */
-    transform: translateY(-50%);
+    top: clamp(100px, 50vh, calc(100vh - 100px));
+    /* Clamp ensures it stays within section boundaries */
 
     /* Alignment within the grid cell */
     justify-self: center;
-    align-self: start;
+    align-self: center;
 
     z-index: 50;
-    height: auto;
+    height: fit-content;
 }
 
 .timelineItem {
