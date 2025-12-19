@@ -231,5 +231,5 @@
 }
 
 .bgLight {
-  background: var(--primary-50);
+  background: transparent;
 }

@@ -5,7 +5,8 @@
     height: 420px;
     text-decoration: none;
     transition: transform 0.3s ease;
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+    /* Stronger drop-shadow to act as border/separation */
+    filter: drop-shadow(0 0 1px rgba(0, 0, 0, 0.2)) drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
     /* Drop shadow works with clip-path better on parent if structured right, but filter is heavy. Use on inner? No, clip-path cuts shadow. */
     /* Alternative: SVG filter or accept no shadow on shape edges, but shadow on content usually suffices. */
 }
