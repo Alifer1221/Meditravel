@@ -207,12 +207,12 @@
 
     /* Sticky logic with boundaries */
     position: sticky;
-    top: clamp(100px, 50vh, calc(100vh - 100px));
-    /* Clamp ensures it stays within section boundaries */
+    top: 150px;
+    /* Positioned closer to cards */
 
     /* Alignment within the grid cell */
     justify-self: center;
-    align-self: center;
+    align-self: flex-start;
 
     z-index: 50;
     height: fit-content;
