@@ -16,10 +16,11 @@
     margin: 0 auto;
     padding: 0 2rem;
     display: grid;
-    /* Left (Content) | Center-Right (Cards) */
-    grid-template-columns: 0.8fr 1fr;
-    gap: 4rem;
-    align-items: flex-start;
+    /* Left (Content) | Center-Right (Cards) | Timeline (Sidebar) */
+    grid-template-columns: 0.8fr 1fr 60px;
+    gap: 3rem;
+    /* STRETCH is critical for sticky columns to have space to move */
+    align-items: stretch;
     position: relative;
 }
 
@@ -198,24 +199,24 @@
     margin-bottom: 0.2rem;
 }
 
-/* TIMELINE SIDEBAR: FIXED positioning with Visibility Logic */
-.timelineFixedSidebar {
-    position: fixed;
-    top: 50%;
-    right: 2rem;
-    transform: translateY(-50%);
+/* TIMELINE SIDEBAR: Sticky in 3rd Column */
+.timelineStickySidebar {
     display: flex;
     flex-direction: column;
-    z-index: 999;
-    pointer-events: none;
-    /* Default hidden/unclickable */
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-}
+    justify-content: center;
+    /* Center content in the sticky container if it has height? */
+    /* Sticky logic: */
+    position: sticky;
+    top: 50vh;
+    /* Center in Viewport */
+    transform: translateY(-50%);
 
-.timelineFixedSidebar[data-visible="true"] {
-    opacity: 1;
-    pointer-events: auto;
+    /* Alignment within the grid cell */
+    justify-self: center;
+    align-self: start;
+
+    z-index: 50;
+    height: auto;
 }
 
 .timelineItem {
@@ -234,6 +235,8 @@
     background: #366193;
     border: 3px solid white;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
 }
 
 .dot.activeDot {
@@ -257,6 +260,7 @@
     opacity: 0;
     transform: translateX(20px);
     transition: all 0.3s;
+    white-space: nowrap;
 }
 
 .timelineItem.activeItem .timelineLabel {
@@ -264,6 +268,7 @@
     transform: translateX(0);
 }
 
+/* Vertical White Line */
 .timelineTrack {
     position: absolute;
     top: 0;
@@ -271,7 +276,7 @@
     right: 9px;
     width: 2px;
     background: rgba(255, 255, 255, 0.3);
-    z-index: -1;
+    z-index: 0;
 }
 
 /* Mobile */
@@ -301,7 +306,7 @@
         margin-bottom: 2rem;
     }
 
-    .timelineFixedSidebar {
+    .timelineStickySidebar {
         display: none !important;
     }
 }

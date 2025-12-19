@@ -128,7 +128,7 @@ export default function ProcessTimeline() {
                     ))}
                 </div>
 
-                {/* FIXED TIMELINE OVERLAY (NOW: Sticky Grid Item) */}
+                {/* GRID CHANNEL 3: Sticky Timeline */}
                 <div className={styles.timelineStickySidebar}>
                     <div className={styles.timelineTrack} />
                     {t.steps.map((_, index) => (
