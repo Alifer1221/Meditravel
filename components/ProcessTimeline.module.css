@@ -1,11 +1,15 @@
+/* Google Fonts Import for Reference Match */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600;700&display=swap');
+
 .section {
     position: relative;
     height: 350vh;
-    /* Long scroll area to accommodate 5 steps comfortably */
-    background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%);
-    /* Blue Theme */
+    background: #366193;
+    /* Accurate Reference Blue */
     padding: 0;
     overflow: hidden;
+    font-family: 'Inter', sans-serif;
+    /* Body font */
 }
 
 .stickyWrapper {
@@ -25,7 +29,6 @@
     height: 100%;
     display: grid;
     grid-template-columns: 0.8fr 1fr;
-    /* Left column slightly narrower */
     gap: 4rem;
     padding: 0 2rem;
     align-items: center;
@@ -40,7 +43,6 @@
     position: relative;
     padding-right: 2rem;
     color: white;
-    /* White text on blue bg */
     z-index: 10;
 }
 
@@ -68,7 +70,8 @@
     gap: 1rem;
     font-size: 1.1rem;
     line-height: 1.5;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 500;
 }
 
 .checkIcon {
@@ -79,7 +82,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #2c5282;
+    color: #366193;
     /* Blue text inside check */
     font-weight: bold;
     font-size: 0.9rem;
@@ -107,10 +110,10 @@
 .card {
     position: absolute;
     inset: 0;
-    background: #fdfbf7;
-    /* Cream / Beige */
+    background: #fbf8f3;
+    /* Cream Paper Tone */
     border-radius: 2rem;
-    padding: 4rem 3rem;
+    padding: 3.5rem 3rem;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
@@ -120,22 +123,34 @@
     opacity: 0;
     transform: translateY(40px) scale(0.9);
     pointer-events: none;
-    z-index: 2;
-    /* Content above images */
+    z-index: 5;
+    color: #1a4d2e;
 }
 
-/* Decorative Image behind Card (The "Dog" equivalent placeholder) */
+/* Decorative Stacked Photos Effect */
 .cardImageBase {
     position: absolute;
-    top: -30px;
-    left: -20px;
-    right: -20px;
-    bottom: -10px;
-    border-radius: 2.5rem;
-    background: rgba(255, 255, 255, 0.1);
+    top: -15px;
+    right: -15px;
+    bottom: 15px;
+    left: 15px;
+    background: #a3c4bc;
+    /* Placeholder / Texture Color */
+    border-radius: 2rem;
+    transform: rotate(6deg);
     z-index: 1;
-    transform: rotate(-3deg);
     transition: all 0.6s ease;
+    opacity: 0.5;
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+    /* Inner bevel */
+    pointer-events: none;
 }
 
 .card.activeCard {
@@ -145,33 +160,60 @@
     z-index: 10;
 }
 
-/* Card Content Styles */
+/* Typography inside Card */
 .stepLabel {
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     color: #1a4d2e;
-    /* Dark Green header text */
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
 }
 
 .cardTitle {
-    font-size: 3rem;
-    font-weight: 800;
+    font-family: 'Fraunces', serif;
+    /* The Reference Font */
+    font-size: 3.2rem;
+    font-weight: 600;
     color: #1a4d2e;
-    /* Dark Green Title */
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
-    font-family: serif;
-    /* Elegant Serif */
+    line-height: 1.05;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
 }
 
-.cardDesc {
-    font-size: 1.15rem;
-    color: #475569;
-    /* Slate 600 */
-    line-height: 1.6;
+/* Numbered List Inside Card style matching reference "01... 02..." */
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cardListItem {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.cardListNum {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    color: #1a4d2e;
+    font-size: 1.1rem;
+}
+
+.cardListText {
+    flex: 1;
+    font-size: 1rem;
+    color: #3f624e;
+    line-height: 1.4;
+}
+
+.cardListText strong {
+    display: block;
+    color: #1a4d2e;
+    font-weight: 700;
+    margin-bottom: 0.2rem;
 }
 
 /* TIMELINE SIDEBAR (Right Edge) */
@@ -203,8 +245,8 @@
     top: 0;
     right: 9px;
     width: 2px;
-    background: #ff5722;
-    /* Orange fill */
+    background: #fa5d94;
+    /* The 'Poopening' Pink */
     z-index: 1;
     transition: height 0.3s ease-out;
 }
@@ -223,35 +265,40 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #2c5282;
-    /* Blue center */
+    background: #366193;
+    /* Match Section Blue */
     border: 3px solid white;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 0 0 4px rgba(0, 0, 0, 0);
+    position: relative;
+    z-index: 2;
 }
 
 .dot.activeDot {
-    background: #ff5722;
-    border-color: #ff5722;
+    background: #fa5d94;
+    /* Pink Active Dot */
+    border-color: #fa5d94;
     transform: scale(1.3);
 }
 
 .timelineLabel {
-    background: #ff5722;
+    background: #fa5d94;
+    /* Pink Pill */
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 9999px;
-    font-weight: 700;
-    font-size: 0.875rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
 
     /* Animation In/Out */
     opacity: 0;
     transform: translateX(20px);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     position: absolute;
-    right: 35px;
-    /* Offset from dot */
+    right: 40px;
     white-space: nowrap;
 }
 
@@ -277,7 +324,6 @@
         text-align: center;
         padding-right: 0;
         align-items: center;
-        /* Center list items */
     }
 
     .title {
