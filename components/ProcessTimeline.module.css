@@ -18,7 +18,7 @@
     display: grid;
     /* Left (Content) | Center-Right (Cards) | Timeline (Sidebar) */
     grid-template-columns: 0.8fr 1fr 60px;
-    gap: 3rem;
+    gap: 6rem;
     /* STRETCH is critical for sticky columns to have space to move */
     align-items: stretch;
     position: relative;
