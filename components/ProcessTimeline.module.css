@@ -217,6 +217,10 @@
     transform: translateX(0);
 }
 
+.mobileList {
+    display: none;
+}
+
 /* Mobile Responsiveness */
 @media (max-width: 1024px) {
     .container {
