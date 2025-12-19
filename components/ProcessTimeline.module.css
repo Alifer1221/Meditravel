@@ -14,8 +14,8 @@
     padding: 0 2rem;
     display: grid;
     /* Left (Content) | Center-Right (Cards) | Timeline (Sidebar) */
-    grid-template-columns: 0.6fr 1fr 60px;
-    gap: 6rem;
+    grid-template-columns: 1fr 1fr 60px;
+    gap: 4rem;
     /* STRETCH is critical for sticky columns to have space to move */
     align-items: stretch;
     position: relative;
@@ -84,7 +84,6 @@
     /* Large gap matches GetJoy spacing */
     padding-bottom: 10vh;
     padding-top: 10vh;
-    margin-left: 4rem;
 }
 
 .cardWrapper {
