@@ -77,8 +77,8 @@ export default function ProcessTimeline() {
                     <a href="/agenda" className={styles.ctaButton} style={{
                         display: 'inline-flex',
                         alignItems: 'center',
-                        background: '#fdfbf7',
-                        color: '#00b4cc',
+                        background: '#00b4cc',
+                        color: '#ffffff',
                         padding: '1rem 2rem',
                         borderRadius: '50px',
                         fontWeight: '800',
