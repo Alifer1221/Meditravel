@@ -54,11 +54,17 @@ export default function ClinicCarousel({ clinics }) {
                 ref={trackRef}
                 onScroll={handleScroll}
             >
-                {clinics.map(clinic => (
-                    <div key={clinic.id} className={styles.carouselItem}>
-                        <ClinicCard clinic={clinic} />
-                    </div>
-                ))}
+                {clinics.map((clinic, index) => {
+                    let variant = 'middle';
+                    if (index === 0) variant = 'start';
+                    else if (index === clinics.length - 1) variant = 'end';
+
+                    return (
+                        <div key={clinic.id} className={styles.carouselItem}>
+                            <ClinicCard clinic={clinic} variant={variant} />
+                        </div>
+                    );
+                })}
             </div>
 
             {/* Right Arrow */}
