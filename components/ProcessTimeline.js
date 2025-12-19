@@ -122,10 +122,29 @@ export default function ProcessTimeline() {
                                     className={`${styles.card} ${activeStep === index ? styles.activeCard : ''}`}
                                 >
                                     <div className={styles.stepLabel}>
-                                        {language === 'es' ? 'Paso' : 'Step'} {index + 1}
+                                        {/* EYEBROW: e.g. FIRST 7 DAYS* */}
+                                        {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}*
                                     </div>
                                     <h3 className={styles.cardTitle}>{step.title}</h3>
-                                    <p className={styles.cardDesc}>{step.description}</p>
+
+                                    {/* Structured List instead of plain p */}
+                                    <div className={styles.cardList}>
+                                        <div className={styles.cardListItem}>
+                                            <div className={styles.cardListNum}>01</div>
+                                            <div className={styles.cardListText}>
+                                                <strong>{language === 'es' ? 'Descripción' : 'Overview'}</strong>
+                                                {step.description}
+                                            </div>
+                                        </div>
+                                        <div className={styles.cardListItem}>
+                                            <div className={styles.cardListNum}>02</div>
+                                            <div className={styles.cardListText}>
+                                                <strong>{language === 'es' ? 'Detalle' : 'Details'}</strong>
+                                                {/* Reusing description or defining new secondary text. For now, duplication or static text to mimic layout */}
+                                                {language === 'es' ? 'Coordinación completa.' : 'Full coordination.'}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             ))}
                         </div>
