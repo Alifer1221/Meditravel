@@ -21,8 +21,9 @@
     /* Left (Content) | Center (Cards) | Right (Timeline) */
     grid-template-columns: 0.8fr 1fr 50px;
     gap: 2rem;
-    align-items: flex-start;
+    /* align-items: stretch; (Default) - Required for sticky tracks to be full height */
     position: relative;
+    justify-items: stretch;
 }
 
 /* ... existing styles ... */
