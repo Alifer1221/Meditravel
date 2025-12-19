@@ -45,7 +45,8 @@
 
 /* Image Section */
 .imageSection {
-    height: 50%;
+    height: 65%;
+    /* Extended down as requested */
     width: 100%;
     position: relative;
     overflow: hidden;
@@ -93,12 +94,12 @@
 .contentSection {
     flex: 1;
     background: white;
-    padding: 2rem;
+    padding: 1.5rem 2rem 2rem 2rem;
+    /* Adjusted padding */
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 2.5rem;
-    /* More space at top */
+    justify-content: flex-end;
+    /* Push text to base */
 }
 
 .middle .contentSection,
