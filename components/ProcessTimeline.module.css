@@ -211,7 +211,7 @@
     /* Positioned closer to cards */
 
     /* Alignment within the grid cell */
-    justify-self: center;
+    justify-self: end;
     align-self: flex-start;
 
     z-index: 50;
