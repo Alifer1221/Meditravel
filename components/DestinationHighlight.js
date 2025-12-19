@@ -7,7 +7,6 @@ import styles from './DestinationHighlight.module.css';
 export default function DestinationHighlight() {
     const { language } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [showNav, setShowNav] = useState(false);
 
     const cities = [
         {
@@ -170,8 +169,6 @@ export default function DestinationHighlight() {
                     {/* Image Column */}
                     <div
                         className={styles.imageWrapper}
-                        onMouseEnter={() => setShowNav(true)}
-                        onMouseLeave={() => setShowNav(false)}
                     >
                         {cities.map((city, index) => (
                             <div
@@ -208,7 +205,7 @@ export default function DestinationHighlight() {
                         {/* Controls */}
                         <button
                             onClick={handlePrev}
-                            className={`${styles.navButton} ${styles.prevButton} ${showNav ? styles.show : ''}`}
+                            className={`${styles.navButton} ${styles.prevButton}`}
                             aria-label="Previous"
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -219,7 +216,7 @@ export default function DestinationHighlight() {
 
                         <button
                             onClick={handleNext}
-                            className={`${styles.navButton} ${styles.nextButton} ${showNav ? styles.show : ''}`}
+                            className={`${styles.navButton} ${styles.nextButton}`}
                             aria-label="Next"
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

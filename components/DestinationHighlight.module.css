@@ -187,6 +187,7 @@
 }
 
 /* Navigation Controls - "Aesthetic Button" */
+/* Navigation Controls - "Aesthetic Button" */
 .navButton {
     position: absolute;
     top: 50%;
@@ -203,7 +204,8 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    z-index: 100 !important;
+    z-index: 9999 !important;
+    /* Force on top */
     outline: none;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 
@@ -212,7 +214,8 @@
     pointer-events: none;
 }
 
-.navButton.show {
+/* Show buttons when hovering the container */
+.imageWrapper:hover .navButton {
     opacity: 1 !important;
     pointer-events: auto !important;
 }
@@ -303,9 +306,13 @@
         font-size: var(--text-4xl);
     }
 
-    .nextButton {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+    .navButton {
+        width: 40px !important;
+        height: 40px !important;
+    }
+
+    .navButton svg {
+        width: 20px;
+        height: 20px;
     }
 }
