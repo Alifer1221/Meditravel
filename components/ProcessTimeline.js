@@ -136,17 +136,15 @@ export default function ProcessTimeline() {
                         >
                             <div className={styles.cardImageBase} />
                             <div className={styles.card}>
-                                <div className={styles.cardHeader}>
-                                    <div>
-                                        <div className={styles.stepLabel}>
-                                            {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}*
-                                        </div>
-                                        <h3 className={styles.cardTitle}>{step.title}</h3>
-                                    </div>
-                                    <div className={styles.cardIconBadge}>
-                                        {Icons[step.iconType]}
-                                    </div>
+                                {/* Icon Badge - Absolute Top Right */}
+                                <div className={styles.cardIconBadge}>
+                                    {Icons[step.iconType]}
                                 </div>
+
+                                <div className={styles.stepLabel}>
+                                    {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}*
+                                </div>
+                                <h3 className={styles.cardTitle}>{step.title}</h3>
 
                                 <div className={styles.cardList}>
                                     <div className={styles.cardListItem}>

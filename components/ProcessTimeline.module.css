@@ -157,11 +157,12 @@
 }
 
 .cardIconBadge {
-    /* Position specific to header flow */
-    position: relative;
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
+    /* Position Absolute Top Right */
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, #00b4cc 0%, #00d4ff 100%);
     border-radius: 12px;
     display: flex;
@@ -170,29 +171,17 @@
     box-shadow: 0 10px 20px rgba(0, 180, 204, 0.3);
     transform: rotate(3deg);
     transition: transform 0.3s ease;
-
-    /* Optical alignment: Push down to align with Title, ignoring Label */
-    margin-top: 1.5rem;
+    z-index: 10;
 }
 
 .cardIconBadge svg {
-    width: 26px;
-    height: 26px;
+    width: 32px;
+    height: 32px;
     color: white;
 }
 
 .cardWrapper:hover .cardIconBadge {
     transform: rotate(0deg) scale(1.1);
-}
-
-/* Header Layout for Title + Icon alignment */
-.cardHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    /* Aligns to top, we use margin on icon to perfect it */
-    gap: 1rem;
-    margin-bottom: 2rem;
 }
 
 /* Decorative Stacked Photos Effect */
@@ -250,9 +239,10 @@
     font-weight: 700;
     color: var(--neutral-800);
     line-height: 1.1;
-    margin: 0;
-    /* Margin handled by cardHeader */
+    margin-bottom: 2rem;
     letter-spacing: -0.01em;
+    padding-right: 70px;
+    /* Space for icon */
 }
 
 .cardList {
