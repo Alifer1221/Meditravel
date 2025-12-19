@@ -1,13 +1,10 @@
-/* Google Fonts Import for Reference Match */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;400;600;700&display=swap');
-
 .section {
     position: relative;
     background: #366193;
     /* Accurate Reference Blue */
     padding: 4rem 0;
     overflow: visible;
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-primary);
 }
 
 .container {
@@ -43,7 +40,7 @@
     line-height: 1.1;
     margin-bottom: 2rem;
     letter-spacing: -0.02em;
-    font-family: var(--font-display), sans-serif;
+    font-family: var(--font-display);
 }
 
 /* Feature List (Checkmarks) */
@@ -157,7 +154,7 @@
 }
 
 .cardTitle {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-size: 3.2rem;
     font-weight: 600;
     color: #1a4d2e;
@@ -179,7 +176,7 @@
 }
 
 .cardListNum {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-weight: 700;
     color: #1a4d2e;
     font-size: 1.1rem;
@@ -190,6 +187,7 @@
     font-size: 1rem;
     color: #3f624e;
     line-height: 1.4;
+    font-family: var(--font-primary);
 }
 
 .cardListText strong {
