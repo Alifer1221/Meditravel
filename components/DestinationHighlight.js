@@ -7,6 +7,7 @@ import styles from './DestinationHighlight.module.css';
 export default function DestinationHighlight() {
     const { language } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [showNav, setShowNav] = useState(false);
 
     const cities = [
         {
@@ -56,6 +57,10 @@ export default function DestinationHighlight() {
 
     const handleNext = () => {
         setCurrentIndex((prev) => (prev + 1) % cities.length);
+    };
+
+    const handlePrev = () => {
+        setCurrentIndex((prev) => (prev - 1 + cities.length) % cities.length);
     };
 
     const handleDotClick = (index) => {
@@ -163,7 +168,11 @@ export default function DestinationHighlight() {
                     </div>
 
                     {/* Image Column */}
-                    <div className={styles.imageWrapper}>
+                    <div
+                        className={styles.imageWrapper}
+                        onMouseEnter={() => setShowNav(true)}
+                        onMouseLeave={() => setShowNav(false)}
+                    >
                         {cities.map((city, index) => (
                             <div
                                 key={index}
@@ -197,8 +206,26 @@ export default function DestinationHighlight() {
                         ))}
 
                         {/* Controls */}
-                        <button onClick={handleNext} className={styles.nextButton}>
-                            →
+                        <button
+                            onClick={handlePrev}
+                            className={`${styles.navButton} ${styles.prevButton} ${showNav ? styles.show : ''}`}
+                            aria-label="Previous"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M19 12H5" />
+                                <path d="M12 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+
+                        <button
+                            onClick={handleNext}
+                            className={`${styles.navButton} ${styles.nextButton} ${showNav ? styles.show : ''}`}
+                            aria-label="Next"
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M5 12h14" />
+                                <path d="M12 5l7 7-7 7" />
+                            </svg>
                         </button>
 
                         {/* Indicators */}
