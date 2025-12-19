@@ -63,33 +63,6 @@
     transform: scale(1.1);
 }
 
-/* Badge */
-.badge {
-    position: absolute;
-    top: 20px;
-    left: 30px;
-    /* Adjusted due to potential cut */
-    background: #1a1a1a;
-    padding: 6px 14px;
-    border-radius: 99px;
-    z-index: 5;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-}
-
-.middle .badge,
-.end .badge {
-    left: 45px;
-    /* Push badge right for slanted left edge */
-}
-
-.badgeText {
-    color: white;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-}
-
 /* Content Section */
 .contentSection {
     flex: 1;

@@ -20,10 +20,6 @@ export default function ClinicCard({ clinic, variant = 'middle' }) {
                         alt={clinic.name}
                         className={styles.image}
                     />
-                    {/* Badge Pill */}
-                    <div className={styles.badge}>
-                        <span className={styles.badgeText}>{clinic.accreditation ? 'CERTIFIED' : 'CLINIC'}</span>
-                    </div>
                 </div>
 
                 {/* Content Section */}
