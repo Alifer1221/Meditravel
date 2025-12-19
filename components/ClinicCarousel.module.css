@@ -51,38 +51,34 @@
 
 /* Navigation Buttons */
 /* Navigation Buttons */
+/* Navigation Buttons */
 .navButton {
     position: absolute;
-    top: 45%;
+    top: 50%;
     transform: translateY(-50%);
-    background: white;
-    border: 1px solid var(--neutral-200);
-    width: 48px;
-    height: 48px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 100;
-    font-size: 1.2rem;
-    color: var(--primary-600);
-    transition: all 0.2s ease;
-}
+    font-size: 1.8rem;
+    padding-bottom: 4px;
+    /* Center arrow vertically */
 
-.navButton:hover {
-    background: var(--primary-500);
+    /* Style: Glassy Dark */
     color: white;
-    transform: translateY(-50%) scale(1.1);
-}
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 
-.prevButton {
-    left: 1rem;
-}
-
-.nextButton {
-    right: 1rem;
+    /* Visibility: Hidden by default */
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
 .carouselContainer:hover .navButton {
@@ -91,17 +87,17 @@
 }
 
 .navButton:hover {
-    background: var(--primary-500);
-    color: white;
+    background: rgba(0, 0, 0, 0.7);
     transform: translateY(-50%) scale(1.1);
+    border-color: white;
 }
 
 .prevButton {
-    left: var(--spacing-2);
+    left: 2rem;
 }
 
 .nextButton {
-    right: var(--spacing-2);
+    right: 2rem;
 }
 
 /* Responsive */
