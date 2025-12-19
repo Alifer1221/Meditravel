@@ -52,7 +52,10 @@ export default function ClinicCarousel({ clinics }) {
                 className={`${styles.navButton} ${styles.prevButton} ${showNav ? styles.show : ''}`}
                 aria-label="Previous"
             >
-                ←
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M19 12H5" />
+                    <path d="M12 19l-7-7 7-7" />
+                </svg>
             </button>
 
             <div
@@ -79,7 +82,10 @@ export default function ClinicCarousel({ clinics }) {
                 className={`${styles.navButton} ${styles.nextButton} ${showNav ? styles.show : ''}`}
                 aria-label="Next"
             >
-                →
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M5 12h14" />
+                    <path d="M12 5l7 7-7 7" />
+                </svg>
             </button>
 
             {/* Pagination Dots - Keep mostly visible or outside hover logic? User didn't specify. */}

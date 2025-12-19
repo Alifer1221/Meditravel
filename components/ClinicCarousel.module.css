@@ -64,9 +64,7 @@
     justify-content: center;
     cursor: pointer;
     z-index: 100;
-    font-size: 1.8rem;
-    padding-bottom: 4px;
-    /* Center arrow vertically */
+    /* Removed font-size/padding since we use SVG now */
 
     /* Style: Glassy Dark */
     color: white;
