@@ -128,22 +128,22 @@ export default function ProcessTimeline() {
                     ))}
                 </div>
 
-            </div>
-
-            {/* FIXED TIMELINE OVERLAY (Matches scrolling progress) */}
-            <div className={styles.timelineOverlay}>
-                <div className={styles.timelineTrack} />
-                {t.steps.map((_, index) => (
-                    <div
-                        key={index}
-                        className={`${styles.timelineItem} ${activeStep === index ? styles.activeItem : ''}`}
-                    >
-                        <div className={styles.timelineLabel}>
-                            {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}
+                {/* FIXED TIMELINE OVERLAY (NOW: Sticky Grid Item) */}
+                <div className={styles.timelineOverlay}>
+                    <div className={styles.timelineTrack} />
+                    {t.steps.map((_, index) => (
+                        <div
+                            key={index}
+                            className={`${styles.timelineItem} ${activeStep === index ? styles.activeItem : ''}`}
+                        >
+                            <div className={styles.timelineLabel}>
+                                {language === 'es' ? `PASO ${index + 1}` : `STEP ${index + 1}`}
+                            </div>
+                            <div className={`${styles.dot} ${activeStep === index ? styles.activeDot : ''}`} />
                         </div>
-                        <div className={`${styles.dot} ${activeStep === index ? styles.activeDot : ''}`} />
-                    </div>
-                ))}
+                    ))}
+                </div>
+
             </div>
         </section>
     );
