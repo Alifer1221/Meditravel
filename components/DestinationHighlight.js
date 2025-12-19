@@ -202,6 +202,10 @@ export default function DestinationHighlight() {
                             </div>
                         ))}
 
+                        {/* Hover Zones for Directional Visibility */}
+                        <div className={styles.hoverZoneLeft} />
+                        <div className={styles.hoverZoneRight} />
+
                         {/* Controls */}
                         <button
                             onClick={handlePrev}

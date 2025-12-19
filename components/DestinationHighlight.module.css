@@ -187,6 +187,26 @@
 }
 
 /* Navigation Controls - "Aesthetic Button" */
+/* Hover Zones */
+.hoverZoneLeft,
+.hoverZoneRight {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    z-index: 50;
+    /* Above image, below buttons/indicators */
+    /* background: red; opacity: 0.1; Debugging */
+}
+
+.hoverZoneLeft {
+    left: 0;
+}
+
+.hoverZoneRight {
+    right: 0;
+}
+
 /* Navigation Controls - "Aesthetic Button" */
 .navButton {
     position: absolute;
@@ -214,8 +234,15 @@
     pointer-events: none;
 }
 
-/* Show buttons when hovering the container */
-.imageWrapper:hover .navButton {
+/* Directional Visibility Logic */
+.hoverZoneLeft:hover~.prevButton,
+.prevButton:hover {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.hoverZoneRight:hover~.nextButton,
+.nextButton:hover {
     opacity: 1 !important;
     pointer-events: auto !important;
 }
