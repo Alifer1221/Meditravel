@@ -59,6 +59,7 @@
     line-height: 1.5;
     color: rgba(255, 255, 255, 0.95);
     font-weight: 500;
+    font-family: var(--font-primary);
 }
 
 .checkIcon {
@@ -151,12 +152,13 @@
     color: #1a4d2e;
     margin-bottom: 0.5rem;
     opacity: 0.8;
+    font-family: var(--font-primary);
 }
 
 .cardTitle {
     font-family: var(--font-display);
     font-size: 3.2rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #1a4d2e;
     line-height: 1.05;
     margin-bottom: 2rem;
