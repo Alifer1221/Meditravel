@@ -20,8 +20,8 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className={styles.brand}>
                         <Link href="/" className={styles.logo}>
-                            <div style={{ position: 'relative', width: '100%', minWidth: '260px', height: '70px' }}>
-                                <Image src="/Logo.png" alt="BridgeHealth" fill style={{ objectFit: 'contain', objectPosition: 'left center' }} />
+                            <div style={{ position: 'relative', width: '100%', minWidth: '320px', height: '90px' }}>
+                                <Image src="/Logo_tight.png" alt="BridgeHealth" fill style={{ objectFit: 'contain', objectPosition: 'left center' }} />
                             </div>
                         </Link>
                         <p className={styles.description}>
