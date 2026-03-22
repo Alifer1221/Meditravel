@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './layout.module.css';
 
@@ -52,8 +53,7 @@ export default function AdminLayout({ children }) {
             <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
                 <div className={styles.sidebarHeader}>
                     <Link href="/" className={styles.logo}>
-                        <span className={styles.logoIcon}>🏥</span>
-                        <span className={styles.logoText}>MedicTravel</span>
+                        <Image src="/Logo.png" alt="BridgeHealth" width={150} height={40} style={{ objectFit: 'contain' }} />
                     </Link>
                     <button
                         className={styles.toggleBtn}

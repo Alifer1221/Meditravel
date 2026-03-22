@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import styles from './Footer.module.css';
 
@@ -19,8 +20,7 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className={styles.brand}>
                         <Link href="/" className={styles.logo}>
-                            <span className={styles.logoIcon}>🏥</span>
-                            <span className={styles.logoText}>MedicTravel</span>
+                            <Image src="/Logo.png" alt="BridgeHealth" width={180} height={50} style={{ objectFit: 'contain' }} />
                         </Link>
                         <p className={styles.description}>
                             Conectamos pacientes con las mejores clínicas y especialistas
