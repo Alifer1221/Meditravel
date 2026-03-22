@@ -20,7 +20,9 @@ export default function Footer() {
                     {/* Brand Column */}
                     <div className={styles.brand}>
                         <Link href="/" className={styles.logo}>
-                            <Image src="/Logo.png" alt="BridgeHealth" width={270} height={75} style={{ objectFit: 'contain' }} />
+                            <div style={{ position: 'relative', width: '100%', minWidth: '260px', height: '70px' }}>
+                                <Image src="/Logo.png" alt="BridgeHealth" fill style={{ objectFit: 'contain', objectPosition: 'left center' }} />
+                            </div>
                         </Link>
                         <p className={styles.description}>
                             Conectamos pacientes con las mejores clínicas y especialistas

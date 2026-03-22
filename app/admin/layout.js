@@ -53,7 +53,9 @@ export default function AdminLayout({ children }) {
             <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.open : ''}`}>
                 <div className={styles.sidebarHeader}>
                     <Link href="/" className={styles.logo}>
-                        <Image src="/Logo.png" alt="BridgeHealth" width={225} height={60} style={{ objectFit: 'contain' }} />
+                        <div style={{ position: 'relative', width: '100%', minWidth: '220px', height: '55px' }}>
+                            <Image src="/Logo.png" alt="BridgeHealth" fill style={{ objectFit: 'contain', objectPosition: 'left center' }} />
+                        </div>
                     </Link>
                     <button
                         className={styles.toggleBtn}
