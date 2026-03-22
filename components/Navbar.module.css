@@ -51,7 +51,7 @@
     align-items: center;
     gap: var(--spacing-2);
     text-decoration: none;
-    width: 350px;
+    width: 280px;
     /* Fixed width to balance center alignment */
 }
 
