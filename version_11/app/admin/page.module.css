@@ -1,0 +1,175 @@
+.dashboard {
+    max-width: 1200px;
+}
+
+.welcome {
+    margin-bottom: var(--spacing-8);
+}
+
+.welcome h1 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--neutral-900);
+    margin-bottom: var(--spacing-2);
+}
+
+.welcome p {
+    color: var(--neutral-500);
+    margin: 0;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-4);
+    margin-bottom: var(--spacing-8);
+}
+
+.statCard {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-5);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-4);
+    text-decoration: none;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-fast);
+}
+
+.statCard:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.statIcon {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--text-2xl);
+}
+
+.statInfo {
+    flex: 1;
+}
+
+.statCount {
+    display: block;
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    color: var(--neutral-900);
+    line-height: 1;
+}
+
+.statTitle {
+    font-size: var(--text-sm);
+    color: var(--neutral-500);
+}
+
+.statArrow {
+    color: var(--neutral-400);
+    font-size: var(--text-xl);
+}
+
+.quickActions {
+    margin-bottom: var(--spacing-8);
+}
+
+.quickActions h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: var(--spacing-4);
+}
+
+.actionsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-4);
+}
+
+.actionCard {
+    background: white;
+    border: 2px dashed var(--neutral-200);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-6) var(--spacing-4);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-2);
+    text-decoration: none;
+    color: var(--neutral-600);
+    transition: all var(--transition-fast);
+}
+
+.actionCard:hover {
+    border-color: var(--primary-400);
+    background: var(--primary-50);
+    color: var(--primary-700);
+}
+
+.actionIcon {
+    font-size: var(--text-2xl);
+}
+
+.actionCard span:last-child {
+    font-size: var(--text-sm);
+    font-weight: 500;
+}
+
+.tips h2 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    color: var(--neutral-900);
+    margin-bottom: var(--spacing-4);
+}
+
+.tipsList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+}
+
+.tip {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+    background: white;
+    padding: var(--spacing-4);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.tipIcon {
+    font-size: var(--text-xl);
+}
+
+.tip p {
+    margin: 0;
+    color: var(--neutral-600);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .actionsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .actionsGrid {
+        grid-template-columns: 1fr;
+    }
+}

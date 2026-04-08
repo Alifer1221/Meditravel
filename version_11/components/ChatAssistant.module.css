@@ -1,0 +1,353 @@
+/* FAB and Window Base Styles */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.6);
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(99, 102, 241, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(99, 102, 241, 0);
+        transform: scale(1);
+    }
+}
+
+.fab {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #eff6ff;
+    /* Very clear/light blue */
+    border: none;
+    cursor: pointer;
+    z-index: 9999;
+    padding: 10px;
+    /* Add padding so icon isn't edge-to-edge */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    /* Restored shadow for depth */
+}
+
+.fab:hover {
+    transform: scale(1.1);
+    background: white;
+    box-shadow:
+        0 0 0 3px rgba(255, 87, 34, 0.65),
+        /* Borde interno definido (Naranja intenso) */
+        0 0 10px rgba(255, 120, 40, 0.5),
+        /* Difuminado medio (Naranja puro) */
+        0 0 25px rgba(255, 170, 0, 0.4),
+        /* Halo externo (Amarillo dorado) */
+        0 10px 30px rgba(0, 0, 0, 0.15);
+    /* Sombra de profundidad original */
+    animation: none;
+}
+
+.badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #ef4444;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chatWindow {
+    position: fixed;
+    bottom: 110px;
+    right: 30px;
+    /* Moved to Right */
+    width: 380px;
+    /* Slightly wider */
+    height: 550px;
+    /* Taller */
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(20px);
+    /* Stronger blur */
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+    transform-origin: bottom right;
+    /* Origin Right */
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.chatWindow.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.header {
+    background: linear-gradient(to right, #2563eb, #3b82f6);
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.agentInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: #2563eb;
+}
+
+.agentName h4 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.agentName span {
+    font-size: 12px;
+    opacity: 0.9;
+    padding: 2px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* Messages Area */
+.messagesContainer {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f8fafc;
+}
+
+.message {
+    max-width: 80%;
+    padding: 12px 16px;
+    border-radius: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.message.admin {
+    align-self: flex-start;
+    background: white;
+    color: #1e293b;
+    border: 1px solid #e2e8f0;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.message.user {
+    align-self: flex-end;
+    background: #3b82f6;
+    color: white;
+    border-bottom-right-radius: 2px;
+}
+
+/* Typing Indicator */
+.typingIndicator {
+    align-self: flex-start;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 16px;
+    border-bottom-left-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    height: 40px;
+    /* Match standard height */
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    background: #94a3b8;
+    border-radius: 50%;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.dot:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -0.16s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0s;
+}
+
+@keyframes bounce {
+
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+/* Input Area */
+.inputArea {
+    padding: 15px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 10px;
+}
+
+.input {
+    flex: 1;
+    border: none;
+    background: #f1f5f9;
+    padding: 10px 15px;
+    border-radius: 20px;
+    outline: none;
+    font-size: 14px;
+}
+
+.sendButton {
+    background: #2563eb;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.sendButton:hover {
+    transform: scale(1.1);
+}
+
+/* Registration Form Styles */
+.registerContainer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    background: white;
+    text-align: center;
+}
+
+.welcomeText {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.registerForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Resume/Restart Styles */
+.resumeActions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.resumeButton {
+    background: #2563eb;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.resumeButton:hover {
+    background: #1d4ed8;
+}
+
+.restartButton {
+    background: white;
+    color: #ef4444;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid #ef4444;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.restartButton:hover {
+    background: #fef2f2;
+}
+
+.registerButton {
+    background: #3b82f6;
+    color: white;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+}
+
+.registerButton:hover {
+    background: #2563eb;
+}
+
+@media (max-width: 480px) {
+    .chatWindow {
+        width: calc(100% - 40px);
+        right: 20px;
+        /* Right align on mobile too */
+        left: auto;
+        bottom: 90px;
+        height: 60vh;
+    }
+}

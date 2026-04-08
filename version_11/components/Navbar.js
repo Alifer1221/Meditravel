@@ -54,7 +54,7 @@ export default function Navbar() {
         <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <Image src="/logo-new.svg" alt="BridgeHealth" width={260} height={70} style={{ objectFit: 'contain' }} priority />
+                    <Image src="/Logo.png" alt="BridgeHealth" width={260} height={70} style={{ objectFit: 'contain' }} priority />
                 </Link>
 
                 <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.active : ''}`}>

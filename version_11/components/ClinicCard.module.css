@@ -1,0 +1,108 @@
+/* Card Container */
+.card {
+    display: block;
+    width: 100%;
+    height: 420px;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+
+    /* Simulate Border using Drop Shadow */
+    /* Darker, harder shadow for border effect */
+    filter: drop-shadow(0 0 1px #64748b) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+/* Shape Variants using Clip-Path */
+/* Slope amount: approx 10-12% width */
+
+.start {
+    --clip-polygon: polygon(0 0, 100% 0, 88% 100%, 0% 100%);
+}
+
+.middle {
+    --clip-polygon: polygon(12% 0, 100% 0, 88% 100%, 0% 100%);
+}
+
+.end {
+    --clip-polygon: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+
+.cardInner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    /* Apply shape here so parent filter sees it */
+    clip-path: var(--clip-polygon);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Intensify shadow on hover */
+    filter: drop-shadow(0 0 1px #64748b) drop-shadow(0 15px 30px rgba(0, 180, 204, 0.15));
+}
+
+/* Image Section */
+.imageSection {
+    height: 65%;
+    /* Extended down as requested */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.1);
+}
+
+/* Content Section */
+.contentSection {
+    flex: 1;
+    background: white;
+    padding: 1.5rem 2rem 2rem 2rem;
+    /* Adjusted padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* Push text to base */
+}
+
+.middle .contentSection,
+.end .contentSection {
+    padding-left: 3.5rem;
+    /* Push text right for slanted left edge */
+}
+
+.start .contentSection {
+    padding-right: 3rem;
+    /* Push text left for slanted right edge */
+}
+
+/* Typography */
+.title {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--neutral-900);
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+}
+
+.description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--neutral-600);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}

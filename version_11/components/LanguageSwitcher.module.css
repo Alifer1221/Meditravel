@@ -1,0 +1,36 @@
+.switcher {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 6px 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-size: 14px;
+    color: white;
+    backdrop-filter: blur(4px);
+    transition: all 0.3s ease;
+}
+
+.switcher:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.lang {
+    font-weight: 500;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+}
+
+.lang.active {
+    font-weight: 700;
+    opacity: 1;
+    color: #4cd6e4;
+    /* Accent color */
+}

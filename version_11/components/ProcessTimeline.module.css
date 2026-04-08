@@ -1,0 +1,394 @@
+.section {
+    position: relative;
+    background: var(--primary-50);
+    /* Very light, almost transparent teal */
+    padding: 4rem 0;
+    overflow: visible;
+    font-family: var(--font-primary);
+}
+
+.container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    /* Left (Content) | Center-Right (Cards) | Timeline (Sidebar) */
+    grid-template-columns: 1fr 1fr 60px;
+    gap: 4rem;
+    /* STRETCH is critical for sticky columns to have space to move */
+    align-items: stretch;
+    position: relative;
+}
+
+/* LEFT COLUMN: Sticky Branding */
+.leftColumn {
+    position: sticky;
+    top: 50px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: var(--neutral-800);
+    z-index: 10;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--neutral-900);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+    font-family: var(--font-display);
+}
+
+/* Feature List (Checkmarks) */
+.featureList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.featureItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    color: var(--neutral-600);
+    font-weight: 500;
+    font-family: var(--font-primary);
+}
+
+.checkIcon {
+    min-width: 24px;
+    height: 24px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #366193;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.ctaButton {
+    display: inline-flex;
+    align-items: center;
+    background: #00b4cc;
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 800;
+    text-decoration: none;
+    width: fit-content;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.ctaButton:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 30px rgba(0, 180, 204, 0.3);
+    background: #00c2db;
+}
+
+/* RIGHT COLUMN: Scrolling Cards */
+.rightColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 40vh;
+    /* Large gap matches GetJoy spacing */
+    padding-bottom: 10vh;
+    padding-top: 10vh;
+    padding-left: 8rem;
+}
+
+.cardWrapper {
+    position: relative;
+    width: 100%;
+    perspective: 1000px;
+}
+
+.card {
+    position: relative;
+    background: white;
+    border-radius: 2rem;
+    padding: 3.5rem 3rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+    z-index: 5;
+    color: #1a4d2e;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    overflow: hidden;
+    /* Ensure icon doesn't spill if placed outside */
+}
+
+.cardIconBadge {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #fa5d94 0%, #ff80a6 100%);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(250, 93, 148, 0.3);
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+}
+
+.cardIconBadge svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.cardWrapper:hover .cardIconBadge {
+    transform: rotate(0deg) scale(1.1);
+}
+
+.cardIconBadge {
+    /* Position Absolute Top Right */
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00b4cc 0%, #00d4ff 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0, 180, 204, 0.3);
+    transform: rotate(3deg);
+    transition: transform 0.3s ease;
+    z-index: 10;
+}
+
+.cardIconBadge svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+}
+
+.cardWrapper:hover .cardIconBadge {
+    transform: rotate(0deg) scale(1.1);
+}
+
+/* Decorative Stacked Photos Effect */
+.cardImageBase {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    bottom: 15px;
+    left: 15px;
+    background: #a3c4bc;
+    border-radius: 2rem;
+    transform: rotate(6deg);
+    z-index: 1;
+    transition: all 0.6s ease;
+    opacity: 0.5;
+}
+
+.card:before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 2rem;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+}
+
+/* State Classes controlled by IntersectionObserver */
+.cardWrapper[data-active="true"] .card {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cardWrapper[data-active="false"] .card {
+    opacity: 0.6;
+    transform: scale(0.95);
+}
+
+
+/* Typography inside Card */
+.stepLabel {
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--neutral-500);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    font-family: var(--font-primary);
+}
+
+.cardTitle {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    /* Small Title as requested */
+    font-weight: 700;
+    color: var(--neutral-800);
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+    padding-right: 70px;
+    /* Space for icon */
+}
+
+.cardList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.cardListItem {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.cardListNum {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--neutral-800);
+    font-size: 1.1rem;
+}
+
+.cardListText {
+    flex: 1;
+    font-size: 1rem;
+    color: var(--neutral-500);
+    line-height: 1.4;
+    font-family: var(--font-primary);
+}
+
+.cardListText strong {
+    display: block;
+    color: var(--neutral-800);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+}
+
+/* TIMELINE SIDEBAR: Sticky in 3rd Column */
+.timelineStickySidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    /* Sticky logic with boundaries */
+    position: sticky;
+    top: 150px;
+    /* Positioned closer to cards */
+
+    /* Alignment within the grid cell */
+    justify-self: end;
+    align-self: flex-start;
+
+    /* Add space to prevent overlap with cards */
+    margin-left: 30px;
+
+    z-index: 50;
+    height: fit-content;
+}
+
+.timelineItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1.5rem;
+    height: 60px;
+}
+
+.dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #366193;
+    border: 3px solid white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.dot.activeDot {
+    background: #fa5d94;
+    border-color: #fa5d94;
+    transform: scale(1.3);
+}
+
+.timelineLabel {
+    background: #fa5d94;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    text-transform: uppercase;
+    position: absolute;
+    right: calc(100% + 10px);
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.3s;
+    white-space: nowrap;
+}
+
+.timelineItem.activeItem .timelineLabel {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Vertical White Line */
+.timelineTrack {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 9px;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 0;
+}
+
+/* Mobile */
+@media (max-width: 1024px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .leftColumn {
+        position: relative;
+        height: auto;
+        top: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+        align-items: center;
+    }
+
+    .rightColumn {
+        gap: 2rem;
+        padding-top: 0;
+        padding-bottom: 4rem;
+    }
+
+    .cardWrapper {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .timelineStickySidebar {
+        display: none !important;
+    }
+}

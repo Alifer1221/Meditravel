@@ -1,0 +1,149 @@
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: var(--spacing-4) 0;
+}
+
+.carouselTrack {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 0;
+    /* No gap for connected feel */
+    padding: var(--spacing-4) var(--spacing-6);
+    /* More side padding */
+    -webkit-overflow-scrolling: touch;
+    /* iOS Momentum Scrolling */
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.carouselTrack::-webkit-scrollbar {
+    display: none;
+    /* Chrome/Safari/Opera */
+}
+
+.carouselItem {
+    flex: 0 0 calc(33.333% + 20px);
+    /* Slightly widther and we'll overlap */
+    margin-left: -25px;
+    /* Pull left to overlap */
+    /* 3 items per view minus gap */
+    scroll-snap-align: start;
+    min-width: 300px;
+    position: relative;
+    /* For z-index */
+    transition: transform 0.3s ease, z-index 0s;
+}
+
+.carouselItem:first-child {
+    margin-left: 0;
+    /* First item doesn't pull */
+}
+
+.carouselItem:hover {
+    z-index: 10;
+    transform: scale(1.02);
+    /* Slight pop on hover */
+}
+
+/* Navigation Buttons */
+/* Navigation Buttons */
+/* Navigation Buttons */
+/* Navigation Buttons */
+.navButton {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999 !important;
+    /* Force on top of everything */
+
+    /* Style: Glassy Dark */
+    color: white;
+    background: rgba(0, 0, 0, 0.6);
+    /* Darker for visibility */
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+    /* Visibility: Hidden by default */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.navButton.show {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.navButton:hover {
+    background: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+    border-color: white;
+}
+
+.prevButton {
+    left: 20px !important;
+}
+
+.nextButton {
+    right: 20px !important;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .carouselItem {
+        flex: 0 0 calc(50% - var(--spacing-3));
+        /* 2 items */
+    }
+}
+
+@media (max-width: 768px) {
+    .carouselItem {
+        flex: 0 0 85%;
+        /* 1 item partially visible */
+        min-width: 280px;
+    }
+
+    /* Hide buttons on mobile, use swipe */
+}
+
+/* Pagination Dots */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-top: 2rem;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #a0aec0;
+    /* Neutral gray */
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+}
+
+.dot:hover {
+    background: #718096;
+}
+
+.activeDot {
+    background: #68d391;
+    /* Green color from image */
+    transform: scale(1.2);
+}
