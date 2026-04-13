@@ -51,7 +51,7 @@ export default function Navbar() {
         <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
             <div className={styles.container}>
                 <Link href="/" className={styles.logo}>
-                    <Image src="/logo-new.svg" alt="BridgeHealth" width={260} height={70} style={{ objectFit: 'contain' }} priority />
+                    <Image src="/logo-new.svg" alt="BridgeHealth" width={240} height={60} style={{ objectFit: 'contain' }} priority />
                 </Link>
 
                 <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.active : ''}`}>
@@ -65,13 +65,12 @@ export default function Navbar() {
                             {link.label}
                         </Link>
                     ))}
-                    {/* Language Switcher Removed */}
-                </div>
-
-                <div className={styles.rightActions}>
                     <Link href="/agenda" className={styles.scheduleBtn}>
                         {language === 'es' ? 'Agendar Cita' : 'Schedule'}
                     </Link>
+                </div>
+
+                <div className={styles.rightActions}>
                     <a href="tel:+1234567890" className={styles.phoneText}>
                         (619) 320-5003
                     </a>
