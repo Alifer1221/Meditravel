@@ -17,7 +17,7 @@
 }
 
 .hidden {
-    transform: translateY(-100%);
+    transform: translate(-50%, -150%);
 }
 
 .navbar::before {
