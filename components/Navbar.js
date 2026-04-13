@@ -43,11 +43,8 @@ export default function Navbar() {
     }, [isMobileMenuOpen]);
 
     const navLinks = [
-        { href: '/', label: t.home },
         { href: '/especialidades', label: t.specialties },
-        { href: '/clinicas', label: t.clinics },
-        { href: '/revista', label: t.magazine },
-        { href: '/testimonios', label: t.testimonials },
+        { href: '/nosotros', label: t.aboutUs },
     ];
 
     return (
