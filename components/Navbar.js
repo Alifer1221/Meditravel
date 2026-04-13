@@ -44,6 +44,7 @@ export default function Navbar() {
 
     const navLinks = [
         { href: '/especialidades', label: t.specialties },
+        { href: '/destinos', label: t.destinations },
         { href: '/nosotros', label: t.aboutUs },
     ];
 
