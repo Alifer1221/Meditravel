@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.5rem; /* Balanced consistent grouping */
+    gap: 1.25rem; /* Tightened internal links for cohesive grouping */
 }
 
 .navLink {
@@ -121,7 +121,7 @@
 .rightActions {
     display: flex;
     align-items: center;
-    gap: 2rem; /* Substantial gap between Center and Contact groups */
+    gap: 3rem; /* Extra separation for the phone number */
     justify-content: flex-end;
 }
 
@@ -151,6 +151,7 @@
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 181, 204, 0.3);
     white-space: nowrap;
+    margin-right: 0.5rem; /* Pushes the neighbor (Switcher) to the right */
 }
 
 .scheduleBtn:hover {

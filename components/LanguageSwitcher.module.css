@@ -1,21 +1,21 @@
 .switcher {
-    background: rgba(0, 0, 0, 0.05); /* Light background for white navbar */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
-    padding: 6px 12px;
+    background: transparent; /* No background for cleaner integration */
+    border: none; /* No border for seamless look */
+    padding: 2px 8px; /* Minimal padding */
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     cursor: pointer;
     font-family: var(--font-main);
-    font-size: 14px;
-    color: #0f172a; /* Dark text matching navbar links */
-    backdrop-filter: blur(4px);
+    font-size: 0.85rem; /* Match navbar links */
+    color: #0f172a; 
     transition: all 0.3s ease;
+    opacity: 0.9;
 }
 
 .switcher:hover {
-    background: rgba(0, 0, 0, 0.1);
+    color: #00b5cc;
+    opacity: 1;
 }
 
 .divider {
