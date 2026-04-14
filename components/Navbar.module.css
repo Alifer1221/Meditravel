@@ -53,8 +53,8 @@
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* Force mathematical centering of the middle block */
     align-items: center;
 }
 
@@ -63,9 +63,8 @@
     align-items: center;
     gap: var(--spacing-2);
     text-decoration: none;
-    flex: 1;
-    /* Adjust slight optical misalignment for the SVG */
-    transform: translateY(-2px);
+    /* Optical baseline synchronization (Final adjustment +3px) */
+    transform: translateY(9.5px);
 }
 
 .logoIcon {
@@ -81,9 +80,10 @@
 
 .navLinks {
     display: flex;
-    gap: var(--spacing-6); /* Reduced gap */
     align-items: center;
     justify-content: center;
+    gap: 0; 
+    padding-left: 1.5rem; /* Extra "breathing room" from the logo */
 }
 
 .navLink {
@@ -91,7 +91,8 @@
     color: #0f172a;
     text-decoration: none;
     font-weight: 800;
-    font-size: 0.85rem; /* Reduced from 1.05rem */
+    font-size: 0.85rem; 
+    padding: 0 1.5rem; /* Equal "air" on both sides for all words */
     transition: color var(--transition-normal);
     opacity: 0.9;
 }
@@ -121,7 +122,7 @@
 .rightActions {
     display: flex;
     align-items: center;
-    gap: var(--spacing-4); /* Reduced gap */
+    gap: var(--spacing-8); /* Increased gap */
     justify-content: flex-end;
     flex: 1;
 }
@@ -144,15 +145,15 @@
 .scheduleBtn {
     background: #00b5cc;
     color: white;
-    padding: 8px 16px; /* Reduced padding */
+    padding: 10px 22px; 
     border-radius: 40px; 
-    font-weight: 700;
+    font-weight: 800;
     text-decoration: none;
-    font-size: 0.75rem; /* Reduced font size */
+    font-size: 0.85rem; 
+    margin-left: 0.5rem; /* Distinct but integrated gap */
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 181, 204, 0.3);
     white-space: nowrap;
-    margin-left: 6px;
 }
 
 .scheduleBtn:hover {
