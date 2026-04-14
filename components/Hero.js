@@ -57,18 +57,6 @@ export default function Hero() {
 
     // Helper to render text based on language logic
     const renderTypingText = () => {
-        // Spanish logic: first char is gender suffix (A/O) which needs to be part of prefix style
-        if (language === 'es') {
-            const firstChar = text.charAt(0);
-            const rest = text.substring(1);
-            return (
-                <>
-                    <span>{firstChar}</span>
-                    <span className={styles.highlight}>{rest}</span>
-                </>
-            );
-        }
-        // English/Default logic: Full word is highlighted
         return <span className={styles.highlight}>{text}</span>;
     };
 
@@ -98,7 +86,6 @@ export default function Hero() {
                 <h1 className={styles.title}>
                     <span>{t.titleStatic}</span>
                     <span className={styles.dynamicTextGroup}>
-                        {language === 'es' ? 'NUESTR' : ''}
                         <span className={styles.typewriterWrapper}>
                             {renderTypingText()}
                             <span className={styles.cursor}>_</span>

@@ -54,7 +54,7 @@
     margin: 0 auto;
     padding: 0;
     display: grid;
-    grid-template-columns: 200px auto 200px; /* Force-equalizing side widths for absolute centering */
+    grid-template-columns: 280px 1fr 280px; /* Fixed side widths to force mathematical center on the middle cell */
     align-items: center;
 }
 
@@ -63,8 +63,8 @@
     align-items: center;
     gap: var(--spacing-2);
     text-decoration: none;
-    /* Lifting the logo (-4px) to synchronize baseline with text links */
-    transform: translateY(-4px);
+    /* Precise vertical baseline synchronization targeting y=70 */
+    transform: translateY(-3px);
     transition: transform var(--transition-normal);
 }
 
@@ -83,7 +83,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 1.25rem; /* Tightened internal links for cohesive grouping */
+    gap: 1.5rem; /* Restored balanced spacing */
 }
 
 .navLink {
