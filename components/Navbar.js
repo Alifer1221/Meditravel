@@ -51,9 +51,11 @@ export default function Navbar() {
     return (
         <nav className={`${styles.navbar} ${isScrolled ? styles.scrolled : ''} ${isHidden ? styles.hidden : ''}`}>
             <div className={styles.container}>
-                <Link href="/" className={styles.logo}>
-                    <Image src="/logo-new.svg" alt="BridgeHealth" width={192} height={48} style={{ objectFit: 'contain' }} priority />
-                </Link>
+                <div className={styles.logoGroup}>
+                    <Link href="/" className={styles.logo}>
+                        <Image src="/logo-new.svg" alt="BridgeHealth" width={192} height={48} style={{ objectFit: 'contain' }} priority />
+                    </Link>
+                </div>
 
                 <div className={`${styles.navLinks} ${isMobileMenuOpen ? styles.active : ''}`}>
                     {navLinks.map((link) => (
