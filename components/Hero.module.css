@@ -128,8 +128,7 @@
     display: inline-flex;
     align-items: center;
     min-height: 1.2em;
-    padding-right: 12px; /* Breathing room for cursor and final letters */
-    /* Prevent layout jump */
+    padding-right: 40px; /* Increased significantly to prevent character clipping on all viewports */
 }
 
 .cursor {
@@ -351,4 +350,5 @@
     align-items: center;
     white-space: nowrap;
     min-width: 0;
+    padding: 0 10px; /* Internal safe zone */
 }
