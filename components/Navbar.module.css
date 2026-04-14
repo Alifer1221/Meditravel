@@ -53,9 +53,10 @@
     width: 100%;
     margin: 0 auto;
     padding: 0;
-    display: grid;
-    grid-template-columns: 220px 1fr 220px; /* Recalibrated side widths to prevent central block crowding */
+    display: flex;
+    justify-content: flex-start;
     align-items: center;
+    gap: 3rem; /* Bringing items closer to the logo */
 }
 
 .logo {
@@ -122,8 +123,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem; /* Balanced gap between Phone and Switcher */
-    justify-content: flex-end;
-    width: 100%;
+    margin-left: auto; /* Pushes contact info to the far right edge of the pill */
 }
 
 .phoneText {
