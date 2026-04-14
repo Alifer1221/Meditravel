@@ -10,10 +10,10 @@
     transition: all var(--transition-normal);
     background: rgba(235, 237, 240, 0.85);
     border-radius: 40px; /* Proportional reduction */
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Slightly reduced spread for cleaner edges */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+    border: none; /* Removing border to avoid dark line artifacts */
 }
 
 .hidden {
@@ -40,8 +40,8 @@
     backdrop-filter: saturate(180%) blur(50px);
     /* Apple-style 'Super Blur' */
     -webkit-backdrop-filter: saturate(180%) blur(50px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    border: none;
     padding: 10px 32px;
 }
 

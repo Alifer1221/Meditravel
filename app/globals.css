@@ -127,12 +127,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  border: 0 solid transparent !important; /* Force true transparency for 0px borders */
+  outline: 0px solid transparent !important; /* Force true transparency for 0px outlines */
 }
 
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--neutral-50) !important;
+  overflow-x: hidden !important; /* Absolute containment */
 }
 
 body {
@@ -140,8 +144,18 @@ body {
   font-size: var(--text-base);
   line-height: 1.6;
   color: var(--neutral-800);
-  background-color: var(--neutral-50);
-  overflow-x: hidden;
+  background-color: var(--neutral-50) !important;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden !important; /* Absolute containment */
+  border: none !important;
+  outline: none !important;
+  min-height: 100vh;
+}
+
+/* Ensure no pseudo-elements add borders to the root */
+html::before, html::after, body::before, body::after {
+  display: none !important;
 }
 
 /* ==========================================

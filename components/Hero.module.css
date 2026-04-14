@@ -5,42 +5,47 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    background-color: var(--neutral-50) !important; /* Force solid fallback */
+    border: none !important;
+    outline: none !important;
 }
 
 .videoBackground {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: transparent;
-    /* Changed from black to transparent to ensure video shows */
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px; /* Aggressive overlap to ensure zero gaps */
+    background: var(--neutral-50);
     z-index: 0;
-    /* Changed from -1 to 0 to be part of the stacking context */
     overflow: hidden;
+    border: none !important;
 }
 
 .video {
     position: absolute;
     top: 50%;
     left: 50%;
-    min-width: 100%;
-    min-height: 100%;
+    min-width: 101%; /* Increased base width */
+    min-height: 101%;
     width: auto;
     height: auto;
-    transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%) scale(1.1); /* Very aggressive scale for maximum coverage */
     object-fit: cover;
     z-index: -1;
+    border: none !important;
+    outline: none !important;
 }
 
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px; /* Deep overlap */
     background: linear-gradient(135deg, rgba(8, 28, 36, 0.8) 0%, rgba(10, 35, 45, 0.7) 100%);
     z-index: 1;
+    border: none !important;
 }
 
 .topText {
@@ -58,14 +63,15 @@
 
 .pattern {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px; /* Deep overlap */
     background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
     background-size: 30px 30px;
     opacity: 0.3;
     z-index: 2;
+    border: none !important;
 }
 
 /* Animations */

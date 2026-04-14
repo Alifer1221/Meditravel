@@ -10,27 +10,19 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-    gap: 0;
-    /* No gap for connected feel */
+    gap: var(--spacing-4); /* Re-introducing gap for better structure */
     padding: var(--spacing-4) var(--spacing-6);
-    /* More side padding */
     -webkit-overflow-scrolling: touch;
-    /* iOS Momentum Scrolling */
     scrollbar-width: none;
-    /* Firefox */
+    max-width: 100%; /* Strict containment */
 }
 
 .carouselTrack::-webkit-scrollbar {
     display: none;
-    /* Chrome/Safari/Opera */
 }
 
 .carouselItem {
-    flex: 0 0 calc(33.333% + 20px);
-    /* Slightly widther and we'll overlap */
-    margin-left: -25px;
-    /* Pull left to overlap */
-    /* 3 items per view minus gap */
+    flex: 0 0 calc(33.333% - var(--spacing-4)); /* Exact fit for 3 items with gap */
     scroll-snap-align: start;
     min-width: 300px;
     position: relative;
