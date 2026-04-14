@@ -116,9 +116,9 @@
 
 .typewriter {
     display: inline-block;
-    overflow: hidden;
+    overflow: visible; /* Removing mask */
     white-space: nowrap;
-    width: 0;
+    width: auto; /* Allow natural expansion */
     border-right: 4px solid var(--primary-400);
     animation: typing 4s steps(42, end) forwards, blink-caret 0.75s step-end infinite;
     text-align: left;
@@ -128,7 +128,8 @@
     display: inline-flex;
     align-items: center;
     min-height: 1.2em;
-    padding-right: 40px; /* Increased significantly to prevent character clipping on all viewports */
+    padding-right: 20px;
+    overflow: visible; /* Absolute safety */
 }
 
 .cursor {
@@ -348,7 +349,8 @@
 .dynamicTextGroup {
     display: inline-flex;
     align-items: center;
-    white-space: nowrap;
-    min-width: 0;
-    padding: 0 10px; /* Internal safe zone */
+    white-space: nowrap; /* Keep on one line */
+    min-width: 0; /* Standard flex behavior */
+    padding: 0;
+    overflow: visible; /* Defeat any masking */
 }
