@@ -69,13 +69,13 @@ export default function Navbar() {
                     <Link href="/agenda" className={styles.scheduleBtn}>
                         {language === 'es' ? 'Agendar Cita' : 'Schedule'}
                     </Link>
-                    <LanguageSwitcher />
                 </div>
 
                 <div className={styles.rightActions}>
                     <a href="tel:+1234567890" className={styles.phoneText}>
                         (619) 320-5003
                     </a>
+                    <LanguageSwitcher />
                 </div>
 
                 <div className={styles.mobileActions}>
