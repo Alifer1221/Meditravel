@@ -128,6 +128,7 @@
     display: inline-flex;
     align-items: center;
     min-height: 1.2em;
+    padding-right: 12px; /* Breathing room for cursor and final letters */
     /* Prevent layout jump */
 }
 
@@ -349,4 +350,5 @@
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
+    min-width: 0;
 }
